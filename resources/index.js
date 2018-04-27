@@ -1,5 +1,45 @@
+  var filler_block1 = [
+    {type: "filler", sentence: "Calvin managed to pass his Spanish exam.", suggests: "It was difficult for Calvin to pass his Spanish exam"},
+    {type: "filler", sentence: "Every basketball player except Lidia is over 6 feet tall.", suggests: "Lidia is a basketball player"},
+    {type: "filler", sentence: "Maria gave birth to twins last week.", suggests: "Maria gave birth to two children last week"},
+    {type: "filler", sentence: "Newtown has a population of less than 10,000.", suggests: "Less than 10,000 people live in Newtown"},];
+
+  var filler_block2 = [
+    {type: "filler", sentence: "Every professor except Professor Smith gave Ruchi an A this semester.", suggests: "Professor Smith gave Ruchi a grade lower than A this semester"},
+    {type: "filler", sentence: "It finally rained in Watsonville on Thursday.", suggests: "Before Thursday, it had not rained in Watsonville in a long time"},
+    {type: "filler", sentence: "Bill wants to study abroad in France next semester.", suggests: "Bill wants to study abroad in Paris next semester"},
+    {type: "filler", sentence: "It must be raining outside right now.", suggests: "It's possible that it isn't raining outside right now"},];
+
+  var condit_dict = { 
+      or_eitherorprime : [
+      {type: "prime", sentence: "Peter inherited either the painting or the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      ], 
+      or_notbothprime : [
+      {type: "prime", sentence: "Peter inherited the painting or the wardrobe from his grandmother, but not both.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      ],
+      or_andprime : [
+      {type: "prime", sentence: "Peter inherited the painting and the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      ],  
+      or_noprime : [
+      {type: "prime", sentence: "Peter inherited the painting from his grandmother, while John inherited the wardrobe.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      ],
+     };
+
 function make_slides(f) {
   var   slides = {};
+  // var present_list = filler_block1.concat(condit_dict[exp.condition][0], filler_block2, condit_dict[exp.condition][1]);
+
+  if (exp.order == "4fillerspacing") {
+    var present_list = filler_block1.concat(condit_dict[exp.condition][0], filler_block2, condit_dict[exp.condition][1]);
+  } else if (exp.order == "nofillerspacing") {
+    var present_list = filler_block1.concat(condit_dict[exp.condition][0], condit_dict[exp.condition][1], filler_block2);
+  } else {
+    console.log("Order is undefined");
+  }
 
   slides.consent = slide({
      name : "consent",
@@ -33,37 +73,14 @@ function make_slides(f) {
     }
   });
 
-  slides.single_trial = slide({
-    name: "single_trial",
-    start: function() {
-      $(".err").hide();
-      $(".display_condition").html("You are in " + exp.condition + ".");
-    },
-    button : function() {
-      response = $("#text_response").val();
-      if (response.length == 0) {
-        $(".err").show();
-      } else {
-        exp.data_trials.push({
-          "trial_type" : "single_trial",
-          "response" : response
-        });
-        exp.go(); //make sure this is at the *end*, after you log your data
-      }
-    },
-  });
-
   slides.one_slider = slide({
     name : "one_slider",
 
     /* trial information for this block
      (the variable 'stim' will change between each of these values,
       and for each of these, present_handle will be run.) */
-    present : [
-      {subject: "dog", object: "ball"},
-      {subject: "cat", object: "windowsill"},
-      {subject: "bird", object: "shiny object"},
-    ],
+
+    present : present_list,
 
     //this gets run only at the beginning of the block
     present_handle : function(stim) {
@@ -71,8 +88,7 @@ function make_slides(f) {
 
       this.stim = stim; //I like to store this information in the slide so I can record it later.
 
-
-      $(".prompt").html(stim.subject + "s like " + stim.object + "s.");
+      $(".prompt").html('"' + stim.sentence + '"' + "<p> <b> suggests </b> <p> <i> " + stim.suggests + ".</i>");
       this.init_sliders();
       exp.sliderPost = null; //erase current slider value
     },
@@ -98,165 +114,10 @@ function make_slides(f) {
     log_responses : function() {
       exp.data_trials.push({
         "trial_type" : "one_slider",
-        "response" : exp.sliderPost
+        "response" : exp.sliderPost,
+        "type" : this.stim.type,
       });
     }
-  });
-
-  slides.multi_slider = slide({
-    name : "multi_slider",
-    present : _.shuffle([
-      {"critter":"Wugs", "property":"fur"},
-      {"critter":"Blicks", "property":"fur"}
-    ]),
-    present_handle : function(stim) {
-      $(".err").hide();
-      this.stim = stim; //FRED: allows you to access stim in helpers
-
-      this.sentence_types = _.shuffle(["generic", "negation", "always", "sometimes", "usually"]);
-      var sentences = {
-        "generic": stim.critter + " have " + stim.property + ".",
-        "negation": stim.critter + " do not have " + stim.property + ".",
-        "always": stim.critter + " always have " + stim.property + ".",
-        "sometimes": stim.critter + " sometimes have " + stim.property + ".",
-        "usually": stim.critter + " usually have " + stim.property + "."
-      };
-
-      this.n_sliders = this.sentence_types.length;
-      $(".slider_row").remove();
-      for (var i=0; i<this.n_sliders; i++) {
-        var sentence_type = this.sentence_types[i];
-        var sentence = sentences[sentence_type];
-        $("#multi_slider_table").append('<tr class="slider_row"><td class="slider_target" id="sentence' + i + '">' + sentence + '</td><td colspan="2"><div id="slider' + i + '" class="slider">-------[ ]--------</div></td></tr>');
-        utils.match_row_height("#multi_slider_table", ".slider_target");
-      }
-
-      this.init_sliders(this.sentence_types);
-      exp.sliderPost = [];
-    },
-
-    button : function() {
-      if (exp.sliderPost.length < this.n_sliders) {
-        $(".err").show();
-      } else {
-        this.log_responses();
-        _stream.apply(this); //use _stream.apply(this); if and only if there is "present" data.
-      }
-    },
-
-    init_sliders : function(sentence_types) {
-      for (var i=0; i<sentence_types.length; i++) {
-        var sentence_type = sentence_types[i];
-        utils.make_slider("#slider" + i, this.make_slider_callback(i));
-      }
-    },
-    make_slider_callback : function(i) {
-      return function(event, ui) {
-        exp.sliderPost[i] = ui.value;
-      };
-    },
-    log_responses : function() {
-      for (var i=0; i<this.sentence_types.length; i++) {
-        var sentence_type = this.sentence_types[i];
-        exp.data_trials.push({
-          "trial_type" : "multi_slider",
-          "sentence_type" : sentence_type,
-          "response" : exp.sliderPost[i]
-        });
-      }
-    },
-  });
-
-  slides.vertical_sliders = slide({
-    name : "vertical_sliders",
-    present : _.shuffle([
-      {
-        "bins" : [
-          {
-            "min" : 0,
-            "max" : 10
-          },
-          {
-            "min" : 10,
-            "max" : 20
-          },
-          {
-            "min" : 20,
-            "max" : 30
-          },
-          {
-            "min" : 30,
-            "max" : 40
-          },
-          {
-            "min" : 40,
-            "max" : 50
-          },
-          {
-            "min" : 50,
-            "max" : 60
-          }
-        ],
-        "question": "How tall is tall?"
-      }
-    ]),
-    present_handle : function(stim) {
-      $(".err").hide();
-      this.stim = stim;
-
-      $("#vertical_question").html(stim.question);
-
-      $("#sliders").empty();
-      $("#bin_labels").empty();
-
-      $("#sliders").append('<td> \
-            <div id="slider_endpoint_labels"> \
-              <div class="top">likely</div> \
-              <div class="bottom">unlikely</div>\
-            </div>\
-          </td>')
-      $("#bin_labels").append('<td></td>')
-
-      this.n_sliders = stim.bins.length;
-      for (var i=0; i<stim.bins.length; i++) {
-        $("#sliders").append("<td><div id='vslider" + i + "' class='vertical_slider'>|</div></td>");
-        $("#bin_labels").append("<td class='bin_label'>" + stim.bins[i].min + " - " + stim.bins[i].max + "</td>");
-      }
-
-      this.init_sliders(stim);
-      exp.sliderPost = [];
-    },
-
-    button : function() {
-      if (exp.sliderPost.length < this.n_sliders) {
-        $(".err").show();
-      } else {
-        this.log_responses();
-        _stream.apply(this); //use _stream.apply(this); if and only if there is "present" data.
-      }
-    },
-
-    init_sliders : function(stim) {
-      for (var i=0; i<stim.bins.length; i++) {
-        utils.make_slider("#vslider" + i, this.make_slider_callback(i), "vertical");
-      }
-    },
-    make_slider_callback : function(i) {
-      return function(event, ui) {
-        exp.sliderPost[i] = ui.value;
-      };
-    },
-    log_responses : function() {
-      for (var i=0; i<this.stim.bins.length; i++) {
-        exp.data_trials.push({
-          "trial_type" : "vertical_slider",
-          "question" : this.stim.question,
-          "response" : exp.sliderPost[i],
-          "min" : this.stim.bins[i].min,
-          "max" : this.stim.bins[i].max
-        });
-      }
-    },
   });
 
   slides.subj_info =  slide({
@@ -285,6 +146,7 @@ function make_slides(f) {
           "trials" : exp.data_trials,
           "catch_trials" : exp.catch_trials,
           "system" : exp.system,
+          "order" : exp.order,
           "condition" : exp.condition,
           "subject_information" : exp.subj_data,
           "time_in_minutes" : (Date.now() - exp.startT)/60000
@@ -300,7 +162,8 @@ function make_slides(f) {
 function init() {
   exp.trials = [];
   exp.catch_trials = [];
-  exp.condition = _.sample(["CONDITION 1", "condition 2"]); //can randomize between subject conditions here
+  exp.condition = _.sample(["or_eitherorprime", "or_andprime", "or_noprime", "or_notbothprime"]); //can randomize between subject conditions here
+  exp.order = _.sample(["4fillerspacing","nofillerspacing"]);
   exp.system = {
       Browser : BrowserDetect.browser,
       OS : BrowserDetect.OS,
@@ -310,7 +173,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "consent", "instructions", "single_trial", "one_slider", "multi_slider", "vertical_sliders", 'subj_info', 'thanks'];
+  exp.structure=["i0", "consent", "instructions", "one_slider", 'subj_info', 'thanks'];
 
   exp.data_trials = [];
   //make corresponding slides:

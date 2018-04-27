@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Title of This Experiment</title>
+    <title>Stanford Linguistics Experiment - "How Likely"?</title>
 
     <!--JS-->
 
@@ -50,8 +50,8 @@ $(function(){
 
   <div class="slide" id="i0" >
     <p id="cocolab">Stanford Linguistics</p>
-    <p id="instruct-text">You will see some stuff and be asked some questions. The HIT should take ~2 minutes. Please pay attention, thanks!</p>
-    <button id="start_button" type="button">Start Experiment</button>
+    <p id="instruct-text">This HIT involves making judgments about sentences of English. The HIT should take roughly 2 minutes. Please pay attention, and thanks for your participation!</p>
+    <button id="start_button" type="button">Continue</button>
   </div>
 
 <!--Consent form used in Stanford linguistics department and is good for ling245.
@@ -92,8 +92,16 @@ Otherwise, modified to whatever is required for you given your affliation.
 
 <div class="slide" id="instructions">
   <h3>Instructions</h3>
-  <p>Here are some instructions.</p>
-  <button onclick="_s.button()">Continue</button>
+  <p> In this experiment, you will be shown 10 pairs of sentences. For each pair, please judge <u>how
+likely</u> it is that the sentence between quotation marks suggests the sentence in italics. <p>
+
+Give answers as diverse as necessary to represent your intuition. You can do so by
+clicking on the sliding scale that will appear below the sentences, with endpoints <i>very unlikely</i> and <i>very likely</i>.
+
+<p>
+
+In order to move on to the next item, a selection on the scale for the current item must be made first.</p>
+  <button onclick="_s.button()">Start experiment</button>
 </div>
 
   <div class="slide" id="single_trial">
@@ -105,10 +113,10 @@ Otherwise, modified to whatever is required for you given your affliation.
   </div>
 
   <div class="slide" id="one_slider">
-    <p>Here is one slider. For every trial in this block, you get an input to the 'present_handle' function. You can use that variable to display different prompts:</p>
+   <!--  <p>Here is one slider. For every trial in this block, you get an input to the 'present_handle' function. You can use that variable to display different prompts:</p> -->
     <p class="prompt"></p>
     <table id="slider_table" class="slider_table">
-      <tr><td class="left">completely disagree</td><td class="right">completely agree</td></tr>
+      <tr><td class="left">very unlikely</td><td class="right">very likely</td></tr>
       <tr><td colspan="2"><div id="single_slider" class="slider"></div></td></tr>
     </table>
     <button onclick="_s.button()">Continue</button>
@@ -188,7 +196,7 @@ Otherwise, modified to whatever is required for you given your affliation.
         <label><option value="2">Better than average HIT</option></label>
       </select>
 
-      <p>We would be interested in any comments you have about this experiment. Please type them here:</p>
+      <p>What do you think this experiment was testing?</p>
       <textarea id="comments" rows="3" cols="50"></textarea>
       <br/>
       <button onclick="_s.submit()">Submit</button>
