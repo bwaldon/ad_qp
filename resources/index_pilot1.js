@@ -1,42 +1,30 @@
   var filler_block1 = [
-    {type: "filler", sentence: "Calvin managed to pass his Spanish exam.", suggests: "It was easy for Calvin to pass his Spanish exam"},
-    // {type: "filler", sentence: "Every basketball player except Lidia is over 6 feet tall.", suggests: "Lidia is a basketball player"},
-    // {type: "filler", sentence: "Maria gave birth to twins last week.", suggests: "Maria gave birth to two children last week"},
+    {type: "filler", sentence: "Calvin managed to pass his Spanish exam.", suggests: "It was difficult for Calvin to pass his Spanish exam"},
+    {type: "filler", sentence: "Every basketball player except Lidia is over 6 feet tall.", suggests: "Lidia is a basketball player"},
+    {type: "filler", sentence: "Maria gave birth to twins last week.", suggests: "Maria gave birth to two children last week"},
     {type: "filler", sentence: "Newtown has a population of less than 10,000.", suggests: "Less than 10,000 people live in Newtown"},];
 
-  // var filler_block2 = [
-  //   {type: "filler", sentence: "Every professor except Professor Smith gave Ruchi an A this semester.", suggests: "Professor Smith gave Ruchi a grade lower than A this semester"},
-  //   {type: "filler", sentence: "It finally rained in Watsonville on Thursday.", suggests: "Before Thursday, it had not rained in Watsonville in a long time"},
-  //   {type: "filler", sentence: "Bill wants to study abroad in France next semester.", suggests: "Bill wants to study abroad in Paris next semester"},
-  //   {type: "filler", sentence: "It must be raining outside right now.", suggests: "It's possible that it isn't raining outside right now"},];
+  var filler_block2 = [
+    {type: "filler", sentence: "Every professor except Professor Smith gave Ruchi an A this semester.", suggests: "Professor Smith gave Ruchi a grade lower than A this semester"},
+    {type: "filler", sentence: "It finally rained in Watsonville on Thursday.", suggests: "Before Thursday, it had not rained in Watsonville in a long time"},
+    {type: "filler", sentence: "Bill wants to study abroad in France next semester.", suggests: "Bill wants to study abroad in Paris next semester"},
+    {type: "filler", sentence: "It must be raining outside right now.", suggests: "It's possible that it isn't raining outside right now"},];
 
   var condit_dict = { 
       or_eitherorprime : [
       {type: "prime", sentence: "Peter inherited either the painting or the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
-      {type: "prime", sentence: "Bill gave Mary either flowers or chocolate for her birthday.", suggests: "Bill gave only one of these things to Mary for her birthday"},
-      {type: "prime", sentence: "Jenny received either a bill or an invitation in the mail today.", suggests: "Jenny received only one of these things in the mail today"},
-      {type: "prime", sentence: "Jack purchased either a sports car or a truck at the dealership.", suggests: "Jack purchased only one of these things at the dealership"},
       {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ], 
       or_notbothprime : [
       {type: "prime", sentence: "Peter inherited the painting or the wardrobe from his grandmother, but not both.", suggests: "Peter inherited only one of these things from his grandmother"},
-      {type: "prime", sentence: "Bill gave Mary flowers or chocolate for her birthday, but not both.", suggests: "Bill gave only one of these things to Mary for her birthday"},
-      {type: "prime", sentence: "Jenny received a bill or an invitation in the mail today, but not both.", suggests: "Jenny received only one of these things in the mail today"},
-      {type: "prime", sentence: "Jack purchased a sports car or a truck at the dealership, but not both.", suggests: "Jack purchased only one of these things at the dealership"},
       {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ],
       or_andprime : [
       {type: "prime", sentence: "Peter inherited the painting and the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
-      {type: "prime", sentence: "Bill gave Mary flowers and chocolate for her birthday.", suggests: "Bill gave only one of these things to Mary for her birthday"},
-      {type: "prime", sentence: "Jenny received a bill and an invitation in the mail today.", suggests: "Jenny received only one of these things in the mail today"},
-      {type: "prime", sentence: "Jack purchased a sports car and a truck at the dealership.", suggests: "Jack purchased only one of these things at the dealership"},
       {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ],  
       or_noprime : [
       {type: "prime", sentence: "Peter inherited the painting from his grandmother, while John inherited the wardrobe.", suggests: "Peter inherited only one of these things from his grandmother"},
-      {type: "prime", sentence: "Bill gave Mary flowers for her birthday, while John gave her chocolate.", suggests: "Bill gave only one of these things to Mary for her birthday"},
-      {type: "prime", sentence: "Jenny received a bill in the mail today, and an invitation in the mail yesterday.", suggests: "Jenny received only one of these things in the mail today"},
-      {type: "prime", sentence: "Jack purchased a sports car at the dealership, and not a truck.", suggests: "Jack purchased only one of these things at the dealership"},
       {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ],
      };
@@ -45,15 +33,13 @@ function make_slides(f) {
   var   slides = {};
   // var present_list = filler_block1.concat(condit_dict[exp.condition][0], filler_block2, condit_dict[exp.condition][1]);
 
-  // if (exp.order == "4fillerspacing") {
-  //   var present_list = filler_block1.concat(condit_dict[exp.condition][0], filler_block2, condit_dict[exp.condition][1]);
-  // } else if (exp.order == "nofillerspacing") {
-  //   var present_list = filler_block1.concat(condit_dict[exp.condition][0], condit_dict[exp.condition][1], filler_block2);
-  // } else {
-  //   console.log("Order is undefined");
-  // }
-  var priming = _.shuffle(filler_block1.concat(condit_dict[exp.condition].slice(0,4)));
-  var present_list = priming.concat(condit_dict[exp.condition][4]);
+  if (exp.order == "4fillerspacing") {
+    var present_list = filler_block1.concat(condit_dict[exp.condition][0], filler_block2, condit_dict[exp.condition][1]);
+  } else if (exp.order == "nofillerspacing") {
+    var present_list = filler_block1.concat(condit_dict[exp.condition][0], condit_dict[exp.condition][1], filler_block2);
+  } else {
+    console.log("Order is undefined");
+  }
 
   slides.consent = slide({
      name : "consent",
@@ -160,7 +146,7 @@ function make_slides(f) {
           "trials" : exp.data_trials,
           "catch_trials" : exp.catch_trials,
           "system" : exp.system,
-          // "order" : exp.order,
+          "order" : exp.order,
           "condition" : exp.condition,
           "subject_information" : exp.subj_data,
           "time_in_minutes" : (Date.now() - exp.startT)/60000
@@ -177,7 +163,7 @@ function init() {
   exp.trials = [];
   exp.catch_trials = [];
   exp.condition = _.sample(["or_eitherorprime", "or_andprime", "or_noprime", "or_notbothprime"]); //can randomize between subject conditions here
-  // exp.order = _.sample(["4fillerspacing","nofillerspacing"]);
+  exp.order = _.sample(["4fillerspacing","nofillerspacing"]);
   exp.system = {
       Browser : BrowserDetect.browser,
       OS : BrowserDetect.OS,
