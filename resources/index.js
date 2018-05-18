@@ -1,8 +1,8 @@
   var filler_block1 = [
-    {type: "filler", sentence: "Calvin managed to pass his Spanish exam.", suggests: "It was easy for Calvin to pass his Spanish exam"},
+    {type: "filler", id: 1, sentence: "Calvin managed to pass his Spanish exam.", suggests: "It was easy for Calvin to pass his Spanish exam"},
     // {type: "filler", sentence: "Every basketball player except Lidia is over 6 feet tall.", suggests: "Lidia is a basketball player"},
     // {type: "filler", sentence: "Maria gave birth to twins last week.", suggests: "Maria gave birth to two children last week"},
-    {type: "filler", sentence: "Newtown has a population of less than 10,000.", suggests: "Less than 10,000 people live in Newtown"},];
+    {type: "filler", id: 2, sentence: "Judith's hometown has a population of less than 10,000.", suggests: "Less than 10,000 people live in Judith's hometown"},];
 
   // var filler_block2 = [
   //   {type: "filler", sentence: "Every professor except Professor Smith gave Ruchi an A this semester.", suggests: "Professor Smith gave Ruchi a grade lower than A this semester"},
@@ -12,32 +12,32 @@
 
   var condit_dict = { 
       or_eitherorprime : [
-      {type: "prime", sentence: "Peter inherited either the painting or the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
-      {type: "prime", sentence: "Bill gave Mary either flowers or chocolate for her birthday.", suggests: "Bill gave only one of these things to Mary for her birthday"},
-      {type: "prime", sentence: "Jenny received either a bill or an invitation in the mail today.", suggests: "Jenny received only one of these things in the mail today"},
-      {type: "prime", sentence: "Jack purchased either a sports car or a truck at the dealership.", suggests: "Jack purchased only one of these things at the dealership"},
-      {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      {type: "prime", id: 1, sentence: "Peter inherited either the painting or the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "prime", id: 2, sentence: "Bill gave Mary either flowers or chocolate for her birthday.", suggests: "Bill gave only one of these things to Mary for her birthday"},
+      {type: "prime", id: 3, sentence: "Jenny received either a bill or an invitation in the mail today.", suggests: "Jenny received only one of these things in the mail today"},
+      {type: "prime", id: 4, sentence: "Jack purchased either a sports car or a truck at the dealership.", suggests: "Jack purchased only one of these things at the dealership"},
+      {type: "crit", id: 1, sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ], 
       or_notbothprime : [
-      {type: "prime", sentence: "Peter inherited the painting or the wardrobe from his grandmother, but not both.", suggests: "Peter inherited only one of these things from his grandmother"},
-      {type: "prime", sentence: "Bill gave Mary flowers or chocolate for her birthday, but not both.", suggests: "Bill gave only one of these things to Mary for her birthday"},
-      {type: "prime", sentence: "Jenny received a bill or an invitation in the mail today, but not both.", suggests: "Jenny received only one of these things in the mail today"},
-      {type: "prime", sentence: "Jack purchased a sports car or a truck at the dealership, but not both.", suggests: "Jack purchased only one of these things at the dealership"},
-      {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      {type: "prime", id: 1, sentence: "Peter inherited the painting or the wardrobe from his grandmother, but not both.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "prime", id: 2, sentence: "Bill gave Mary flowers or chocolate for her birthday, but not both.", suggests: "Bill gave only one of these things to Mary for her birthday"},
+      {type: "prime", id: 3, sentence: "Jenny received a bill or an invitation in the mail today, but not both.", suggests: "Jenny received only one of these things in the mail today"},
+      {type: "prime", id: 4, sentence: "Jack purchased a sports car or a truck at the dealership, but not both.", suggests: "Jack purchased only one of these things at the dealership"},
+      {type: "crit", id: 1, sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ],
       or_andprime : [
-      {type: "prime", sentence: "Peter inherited the painting and the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
-      {type: "prime", sentence: "Bill gave Mary flowers and chocolate for her birthday.", suggests: "Bill gave only one of these things to Mary for her birthday"},
-      {type: "prime", sentence: "Jenny received a bill and an invitation in the mail today.", suggests: "Jenny received only one of these things in the mail today"},
-      {type: "prime", sentence: "Jack purchased a sports car and a truck at the dealership.", suggests: "Jack purchased only one of these things at the dealership"},
-      {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      {type: "prime", id: 1, sentence: "Peter inherited the painting and the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "prime", id: 2, sentence: "Bill gave Mary flowers and chocolate for her birthday.", suggests: "Bill gave only one of these things to Mary for her birthday"},
+      {type: "prime", id: 3, sentence: "Jenny received a bill and an invitation in the mail today.", suggests: "Jenny received only one of these things in the mail today"},
+      {type: "prime", id: 4, sentence: "Jack purchased a sports car and a truck at the dealership.", suggests: "Jack purchased only one of these things at the dealership"},
+      {type: "crit", id: 1, sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ],  
       or_noprime : [
-      {type: "prime", sentence: "Peter inherited the painting from his grandmother, while John inherited the wardrobe.", suggests: "Peter inherited only one of these things from his grandmother"},
-      {type: "prime", sentence: "Bill gave Mary flowers for her birthday, while John gave her chocolate.", suggests: "Bill gave only one of these things to Mary for her birthday"},
-      {type: "prime", sentence: "Jenny received a bill in the mail today, and an invitation in the mail yesterday.", suggests: "Jenny received only one of these things in the mail today"},
-      {type: "prime", sentence: "Jack purchased a sports car at the dealership, and not a truck.", suggests: "Jack purchased only one of these things at the dealership"},
-      {type: "crit", sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      {type: "prime", id: 1, sentence: "Peter inherited the painting from his grandmother, while John inherited the wardrobe.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "prime", id: 2, sentence: "Bill gave Mary flowers for her birthday, while John gave her chocolate.", suggests: "Bill gave only one of these things to Mary for her birthday"},
+      {type: "prime", id: 3, sentence: "Jenny received a bill in the mail today, and an invitation in the mail yesterday.", suggests: "Jenny received only one of these things in the mail today"},
+      {type: "prime", id: 4, sentence: "Jack purchased a sports car at the dealership, and not a truck.", suggests: "Jack purchased only one of these things at the dealership"},
+      {type: "crit", id: 1, sentence: "Joanne invited David or Sabine to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ],
      };
 
@@ -102,7 +102,7 @@ function make_slides(f) {
 
       this.stim = stim; //I like to store this information in the slide so I can record it later.
 
-      $(".prompt").html('"' + stim.sentence + '"' + "<p> <b> suggests </b> <p> <i> " + stim.suggests + ".</i>");
+      $(".prompt").html('<b>"' + stim.sentence + '"</b>' + "<p> How likely is it that the speaker meant to suggest: <p> <i> " + stim.suggests + ".</i>");
       this.init_sliders();
       exp.sliderPost = null; //erase current slider value
     },
@@ -130,6 +130,7 @@ function make_slides(f) {
         "trial_type" : "one_slider",
         "response" : exp.sliderPost,
         "type" : this.stim.type,
+        "id" : this.stim.id,
       });
     }
   });
