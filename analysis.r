@@ -2,16 +2,6 @@ library(tidyverse)
 library(lme4)
 library(lmerTest)
 theme_set(theme_bw())
-d <- read.csv("/Users/bwaldon/Documents/GitHub/Submiterator/pilot2.csv")
-write.csv(d, file = "pilot2_data.csv")
-
-setwd("~/Documents/GitHub/ad_qp")
-d <- read.csv("pilot2_data.csv")
-nrow(d[d$type == "\"filler\"",])
-head(d)
-table(d$workerid)
-length(unique(d$workerid))
-
 library(bootstrap)
 theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
 
@@ -20,9 +10,27 @@ ci.low <- function(x,na.rm=T) {
 ci.high <- function(x,na.rm=T) {
   quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
 
+
+setwd("~/Documents/GitHub/ad_qp")
+d <- read.csv("results/pilot3_data.csv")
+
 levels(d$Answer.condition)
 levels(d$Answer.condition) <- c("and","either-or","[none]","or-but-not-both")
 
+p = d %>%
+  filter(type == "\"filler\"")
+
+exclude = c()
+for(worker in p$workerid) {
+  if(abs(p[p$workerid == worker & p$id == 1,]$response - p[p$workerid == worker & p$id == 2,]$response) < 0.05) {
+    exclude = c(exclude, worker)
+  }
+  exclude = unique(exclude)
+}
+
+d <- d %>%
+  filter(!(workerid %in% exclude)) 
+  
 toplot = d %>%
   filter(type == "\"crit\"") %>%
   group_by(Answer.condition) %>%
@@ -79,6 +87,8 @@ fillers = d %>%
 p <- ggplot(fillers, aes(x=response)) +
   geom_histogram() + 
   facet_wrap(~workerid)
+
+p
   
 ggsave("fillers_bysubject.png", width = 20, height = 40)
 
