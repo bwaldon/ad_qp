@@ -78,7 +78,7 @@
       {type: "crit", id: "party", sentence: "Joanne invited David or Samantha to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ],
       // ONLY THE CRITICAL TRIAL
-      or_noprime_oneshot : : [
+      or_noprime_oneshot : [
       {type: "crit", id: "party", sentence: "Joanne invited David or Samantha to the party.", suggests: "Joanne invited only one of these two people to the party"},
       ],
      };
@@ -96,8 +96,13 @@ function make_slides(f) {
   // } else {
   //   console.log("Order is undefined");
   // }
-  var priming = _.shuffle(condit_dict[exp.condition].slice(0,4));
-  var present_list = priming.concat(condit_dict[exp.condition][4]);
+
+  if (exp.condition == "or_noprime_oneshot") {
+    var present_list = condit_dict[exp.condition];
+  } else {
+    var priming = _.shuffle(condit_dict[exp.condition].slice(0,4));
+    var present_list = priming.concat(condit_dict[exp.condition][4]);
+  }
 
   slides.consent = slide({
      name : "consent",
