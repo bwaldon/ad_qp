@@ -92,9 +92,9 @@ Otherwise, modified to whatever is required for you given your affliation.
 
 <div class="slide" id="instructions">
   <h3>Instructions</h3>
-  <p> In this experiment, you will see 7 pairs of sentences. For each pair, please judge how likely it is that the speaker of the <b>bolded</b> sentence meant to imply the sentence in <i>italics.</i> <p>
+  <p> In this experiment, you will see up to 7 pairs of sentences. For each pair, please judge how likely it is that the speaker of the <b>bolded</b> sentence meant to imply the sentence in <i>italics.</i> <p>
 
-Indicate your judgment by clicking on the sliding scale that will appear below the sentences. Don't think too deeply about the sentences, just provide your first intuition about what the speaker meant!
+Indicate your judgment by clicking on the sliding scale that will appear below the sentences. Don't think too deeply about the sentences, just provide your first intuition about what the speaker meant! <p>
 
 
   <button onclick="_s.button()">Start experiment</button>
@@ -108,6 +108,16 @@ Indicate your judgment by clicking on the sliding scale that will appear below t
     <p class="err">Please write something.</p>
   </div>
 
+  <div class="slide" id="getready_practice">
+    <p>You'll start with two practice trials. Click "Continue" to begin.</p>
+    <button onclick="_s.button()">Continue</button>
+  </div>
+
+  <div class="slide" id="getready">
+    <p>Now, click "Continue" to start the experiment.</p>
+    <button onclick="_s.button()">Continue</button>
+  </div>
+
   <div class="slide" id="one_slider">
    <!--  <p>Here is one slider. For every trial in this block, you get an input to the 'present_handle' function. You can use that variable to display different prompts:</p> -->
     <p class="prompt"></p>
@@ -116,7 +126,8 @@ Indicate your judgment by clicking on the sliding scale that will appear below t
       <tr><td colspan="2"><div id="single_slider" class="slider"></div></td></tr>
     </table>
     <button onclick="_s.button()">Continue</button>
-    <div class="err">Please adjust the slider before continuing.</div>
+    <div class="err"><p> Please adjust the slider before continuing.</div>
+    <div class="err_practice"><p> Not quite! Remember that if the implied meaning is likely, your answer should be on the higher end of the scale. If the implied meaning is unlikely, your answer should be on the lower end of the scale.</div>
   </div>
 
   <div class="slide" id="multi_slider">
