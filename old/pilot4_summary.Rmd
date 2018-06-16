@@ -1,0 +1,371 @@
+---
+title: "Activating Alternatives in Pragmatic Interpretation"
+author: "Brandon Waldon"
+date: "June 15, 2015"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+header-includes: \usepackage{hyperref}
+fontsize: 12pt
+bibliography: refs.bib
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(bootstrap)
+library(formatR)
+library(reshape)
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
+```
+
+# Introduction
+
+Much work in the pragmatics literature has been devoted to the study of how utterance alternatives are computed and activated in pragmatic interpretation. The notion of an utterance alternative - a possible utterance that a speaker could have said in a given context (but did not say) - is central to our understanding of conversational implicature generally and scalar implicature specifically, as the following definition offered by @Potts:2013:PI (p. 179) makes clear: 
+
+\setlength{\leftskip}{1cm}
+
+An utterance $U$ conveys a scalar conversational implicature iff there are alternative utterances $U'$ that are at least as relevant as $U$ in the discourse and that are communicatively stronger than $U$. (The content of this implicature will depend on the context, the nature of the utterance competition, and other pragmatic factors.)
+
+\setlength{\leftskip}{0pt}
+
+Whether one subscribes to a (neo-)Gricean theory of scalar implicature - whereby scalar inferences arise due to a listener employing counter-factual reasoning about why a speaker chose not to utter a stronger alternative - or a more recent grammaticist theory of scalar implicature [@chierchia2006; @Chierchia2012-CHISSI] - whereby scalar inferences are chached out with the use of a semantic operator that negates the stronger alternatives, one needs an additional theory of **which alternatives** listeners recruit in their pragmatic interpretation of an utterance in a discourse context. Perspectives on this topic include what we may broadly characterize as *scalar* theories of alternative computation [@Horn1972; @gazdar1979pragmatics; @Horn1989-HORANH; @hirschberg1985theory; @Matsumoto1995], which posit that utterance alternatives are computed by substituting some amount of lexical material *L* in an utterance with material *L'* which outranks *L* on some scale of communicative strength; and *structural* theories [@Katzir2007; @Fox2011], which posit that an utterance alternatives are computed by generating structures of equal or lesser complexity than the given utterance. 
+
+Researchers on both sides of the scalar/structural divide have assumed that a main desideratum of a theory of alternatives should be to generate a finite and small set of alternatives for any utterance. For example, it is tacitly accepted that a theory of alternatives should help explain why a listener, upon hearing a speaker utter *John ate some of the cookies*, will (given the correct contextual preconditions) come to infer that it is not the case that John ate all of the cookies via the conversationally-stronger alternative *John ate all of the cookies*. However, there are other potential utterances which outrank *John ate some of the cookies* in terms of strength, including *John ate some but not all of the cookies*. But the negation of *John ate some but not all of the cookies* coupled with the negation of *John ate all of the cookies* leads to a contradictory inference; moreover, the negation of *John ate some but not all of the cookies* coupled with an assertion of *John ate some of the cookies* should lead the hearer to infer that, in fact, John ate all of the cookies. This conundrum illustrates what has been referred to in the implicature literature as the **symmetry problem**, and a successful theory is often assumed to be one that blocks *John ate some but not all of the cookies* as an alternative, thereby **breaking symmetry**. 
+
+There are other options for symmetry breaking that do not rely on the assumption that the set of alternatives is some finite and small set of utterances (of which, in e.g. the case of *some*, *some but not all* is presumed not to be a member). For example, `symmetric alternatives' are compatible with Rational Speech Act models of pragmatic competence; in fact, the RSA is conceptually (if not computationally) tractable on an assumption that listeners implicitly reason over *all* possible utterances in pragmatic interpretation (for more discussion, see my literature review on pragmatic alternatives in RSA: \url{https://bwaldon.github.io/ad_qp/alternatives.pdf}). 
+
+Moreover, there is a recent but growing body of psycholinguistic literature which suggests that scalar inference is modulated through exposure to sentences that are not traditionally understood to be in that finite set of alternatives for a given utterance [@kurumada2012pragmatic; @degentanenhaus; @NS2015]. For example, @NS2015 report that *or* and *either-or* only give rise to different behavior with respect to exclusivity inference (i.e. the upper-bounding `not-*and*' exclusivity implicature) when speakers are exposed to both of these utterances in the same context. In one between-subjects experiment performed by the authors, participants who were asked to rate the likelihood of an exclusivity reading given sentences containing \textit{or} behaved no differently from participants in a separate experimental condition who were asked to rate the likelihood of an exclusivity reading with \textit{either-or}. However, in a second experiment, where participants saw critical trials containing both \textit{or} and \textit{either-or}, there was an observed strength asymmetry between the two lexical items. 
+
+To explain these results, @NS2015 claim that absent exposure to \textit{either-or}, participants contrast \textit{or} with its putative `normal' alternative \textit{and}, which leads to a pragmatically-derived exclusivity inference that is truth-conditionally equivalent to the semantic exclusivity entailment of \textit{either-or}. However, in a context where \textit{either-or} has been made salient, participants make \textit{either-or} (rather than \textit{and}) the object of contrast with \textit{or}. In subsequent experiments reported in the paper, the authors report that this empirical finding holds cross-linguistically (i.e. in German in addition to English). 
+
+The findings of @NS2015 problematize a traditional view of alternative computation which fixes, e.g., the alternatives of *or* to a small set of alternatives including *and* but not *either-or* (on the grounds that *and* and *either-or* taken together as alternatives to *or* would give rise to the symmetry problem). However, more empirical investigation is warranted. First, the analysis offered by @NS2015 predicts weaking of exclusivity inferences with *or* given a prime of *either-or*, but the behavior of participants in both experimental conditions was numerically almost identical when it came to exclusivity judgments about *or* (though the results from these two experiments are not directly comparable, as they were not run in identical experimental settings). Second, the scope of the authors' study was limited to priming with *either-or*, with no investigation as to whetehr exclusivity inferences differ when participants are primed with other constructions - including *or*'s putative `normal' alternative *and*. In the present study, I seek to address both of these open empirical issues.
+
+# Experiment 
+
+## Hypotheses
+
+The present experiment takes as its point of departure the findings reported by @NS2015, who based on their empirical results claim that a prime of *either-or* will depress exclusivity inferences for *or*. This first hypothesis of the present study, H1$_1$, contrasts with a null hypothesis H0$_1$, which posits no effect of an *either-or* prime on exclusivity inferences for *or*: 
+
+\medskip
+
+\setlength{\leftskip}{1cm}
+
+H1$_1$: Priming listeners with exposure to utterances containing *either-or* will depress strength of exclusivity inferences for *or*.
+
+H0$_1$: Priming listeners with exposure to utterances containing *either-or* will not depress strength exclusivity inferences for *or*.
+
+\setlength{\leftskip}{0pt}
+
+\medskip
+
+The present study extends the paradigm of @NS2015 to investigate the effect of two additional utterance primes on interpretation of *or*. First, note that the phrase *or, but not both*, while lexically more complex than *either-or*, also encodes in its semantics an exclusivity meaning. The second hypothesis of the present study, H1$_2$, is that a prime of *either-or* could also depress exclusivity inferences for *or*: 
+
+\medskip
+
+\setlength{\leftskip}{1cm}
+
+H1$_2$: Priming listeners with exposure to utterances containing *or, but not both* will depress strength exclusivity inferences for *or*.
+
+H0$_2$: Priming listeners with exposure to utterances containing *or, but not both* will not depress strength exclusivity inferences for *or*.
+
+\setlength{\leftskip}{0pt}
+
+\medskip
+
+Second, I was interested in seeing whether the putative `normal' alternative to *or* - *and* - could have a similar priming effect on *or*, but in the opposite direction. The rationale for this hypothesis is that increasing the salience of a lexical item with an upper-bounded inclusive meaning should - if anything - heighten a listener's awareness that the speaker did not choose to explicitly communicate that upper-bound, leading to a greater rate of inference that the upper-bounded meaning does not hold. At the same time, if *and* is the default, conventional alternative to *or*, one might imagine that *and* is insensitive to additional contextual support and that the additional priming will have no effect: 
+
+\medskip
+
+\setlength{\leftskip}{1cm}
+
+H1$_3$: Priming listeners with exposure to utterances containing *and* will increase strength exclusivity inferences for *or*.
+
+H0$_3$: Priming listeners with exposure to utterances containing *and* will not increase strength exclusivity inferences for *or*.
+
+\setlength{\leftskip}{0pt}
+
+\medskip
+
+## Predictions and linking assumptions 
+
+H1$_1$, H1$_2$, and H1$_3$ are each associated with predictions about behavior which I make explicit here. For the purposes of the present study, an increase or decrease in strength of exclusivity inference for *or* is defined with respect to a baseline of strength of exclusivity inference absent a prime.
+
+The study presented by @NS2015 and the present study make similar behavioral linking assumptions. @NS2015 probe strength of exclusivity inference by asking participants to rate the likelihood (on a 1 to 7 Likert scale) that a sentence of the form *A or B* or *Either A or B* suggests a meaning of the form *Not both A and B*. In their paper and for the purposes of the present study, "strength of exclusivity inference" is assumed to have a positively-correlated with the numeric response on a scale when participants are asked to determine the likelihood that the target sentence suggests an upper-bounded, exclusive meaning. 
+
+## Methods 
+
+### Participants
+
+220 participants (US IP Addresses, prior approval rating > 95\%) were recruited on Amazon Mechanical Turk. Participants were paid $0.20 for a task which took, on average, roughly 3 minutes to complete. 
+
+### Materials 
+
+Each trial consisted of **bolded** sentence (the target item), followed on a separate line by the text "How likely is it that the speaker meant to suggest", followed on a separate line by an *italicized* sentence. Each trial also contained continuous scale bounded by the endpoints "very unlikely" (on the left end of the scale) and "very likley" (on the right end of the scale). The final trial presented in every condition was the sentence following sentence containing *or*: **Joanne invited David or Samantha to the party**, followed by the italicized sentence *Joanne invited only one of these two people to the party* - where the presence of the operator *only* was assumed to semantically entail an exclusive reading of the sentence. 
+
+On trials preceding this final trial, experimental conditions differed as to the nature of the *italicized* sentence about which the "How likely is it that the speaker meant to suggest" question was asked. In "exclusivity interpretation" conditions, the italicized sentence was always meant to elicit an exclusive reading of the bolded sentence shown on that trial, using the a construction containing *only*. In "orthogonal interpretation" conditions, the italicized sentence asked about some other entailment or inference of the bolded sentence; for example, when the target sentence was **Peter inherited either the painting or the wardrobe from his grandmother**, in "orthogonal interpretation" conditions the italicized sentence was *Peter's grandmother has passed away*. 
+
+Conditions also differed as to the nature of the **bolded** sentence on trials preceding the final trial. In "either-or" prime conditions, sentences were always of the form **Either A or B**. In "or, but not both" prime conditions sentences were always of the form **A or B, but not both**. In "A and B" prime conditions, sentences were always of the form **A and B**. In "no-prime" conditions, which were included to provide a baseline of behavior, sentences were always of the form **A, whereas B** (e.g. **Peter inherited the painting or from his grandmother, whereas his aunt inherited the wardrobe**). Each of these four "priming" conditions were fully crossed with the two ``interpretation" conditions described above, for 8 conditions. 
+
+Two additional conditions were included, bringing the total number of experimetnal conditions to 10. In one additional no-prime condition (the "one-off" condition), there were no priming trials, only the final trial as described above. In a second additional no-prime condition, participants were asked about the "orthogonal" inference but the priming trials were truncated from the form **A, whereas B** to simply **A** (the first conjunct of the sentence).
+
+Each of the conditions (with the exception of the "one-off" condition) contained four trials preceding the final trial, the order of which was randomized for every participant. There were no filler trials. 
+
+### Procedure 
+
+Participants were shown the following instructions: 
+
+\begin{center}
+
+In this experiment, you will see up to 7 pairs of sentences. For each pair, please judge how likely it is that the speaker of the \textbf{bolded} sentence meant to imply the sentence in \textit{italics}.
+
+"Indicate your judgment by clicking on the sliding scale that will appear below the sentences. Don't think too deeply about the sentences, just provide your first intuition about what the speaker meant!"
+
+\end{center}
+
+After clicking through these instructions to start the experiment, participants were informed that they would be given two practice trials which contained the following sentence pairs: 
+
+\medskip 
+
+Practice trial 1: 
+\setlength{\leftskip}{1cm}
+
+**A handful of people showed up to the meeting.**
+
+*Nobody showed up to the meeting.*
+
+\setlength{\leftskip}{0pt}
+
+Practice trial 2:
+\setlength{\leftskip}{1cm}
+
+**Judith's hometown has a population of less than 10,000.**
+
+*Fewer than 10,000 people live in Judith's hometown.*
+
+\setlength{\leftskip}{0pt}
+
+\medskip
+
+If a participant provided a response within the upper portion of the scale on the first practice trial, and/or if she provided a response within the lower portion of the scale for the second practice trial, the following message appeared: 
+
+\begin{center}
+"Not quite! Remember that if the implied meaning is likely, your answer should be on the higher end of the scale. If the implied meaning is unlikely, your answer should be on the lower end of the scale."
+\end{center}
+
+In these cases, participants had to move the slider to the opposite end of the scale before continuing. There was no feedback on subsequent trials. In order to move to the next trial, participants had a to make a selection on the scale. 
+
+This experiment was registered through the Open Science Foundation after it was run. The registration can be accessed here: \url{https://osf.io/e3tqu/}
+
+Lastly, a working prototype of the experiment can be accessed in this repository at \url{https://bwaldon.github.io/ad_qp/}. 
+
+## Results 
+
+The following table provides the number of participants who responded in each condition of the experiment: 
+
+---
+
+### Experimental conditions (10 total): 
+
+* "Exclusivity inference" conditions:
+  + "Either-or" prime **n = 19**
+  + "Or, but not both" prime **n = 22**
+  + "And" prime **n = 21**
+  + No prime (ex: "Peter inherited the painting from his grandmother, whereas his aunt Jill inherited the wardrobe"): **n = 22** 
+  
+* "Orthogonal inference" conditions:
+  + "Either-or" prime **n = 18**
+  + "Or, but not both" prime **n = 21**
+  + "And" prime **n = 19**
+  + No prime (ex: "Peter inherited the painting from his grandmother, whereas his aunt Jill inherited the wardrobe"): **n = 28**
+  + No prime, just first conjunct (ex: "Peter inherited the painting from his grandmother") **n = 22**
+  
+* 'One-off' condition (only the critical trial): **n = 12**
+
+---
+
+I next present visualizations of how behavior on the final trial, which involved interpretation of a sentence containing (bare, unmodified) *or*, differed across conditions:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 5, fig.height = 3}
+setwd("~/Documents/GitHub/ad_qp")
+d <- read.csv("results/pilot4_data.csv")
+
+# Cleaning data
+
+d$meaningprime = sapply(strsplit(as.character(d$Answer.condition),"_"), "[", 3)
+d[d$meaningprime == "exclu",]$meaningprime <- "exclusive_interpretation" 
+d[d$meaningprime == "exlcu",]$meaningprime <- "exclusive_interpretation" #typo from experiment collection
+d[d$meaningprime == "orthog",]$meaningprime <- "orthogonal_interpretation" 
+d$utteranceprime = sapply(strsplit(as.character(d$Answer.condition),"_"), "[", 2)
+d$firstconj = sapply(strsplit(as.character(d$Answer.condition),"_"), "[", 4)
+d$utteranceprime <- factor(d$utteranceprime)
+d$utteranceprime <- relevel(d$utteranceprime, ref="noprime")
+
+toplot = d %>%
+  filter(type == "crit" & !(meaningprime == "oneshot") & meaningprime == "exclusive_interpretation" & is.na(firstconj)) %>%
+  group_by(utteranceprime) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+ggplot(toplot, aes(x=utteranceprime,y=Mean)) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+  geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) + 
+  labs(x = "Priming condition", y = "Mean likelihood of exclusive inference") +
+  ggtitle("Interpretation of 'or' in exclusivity inference conditions")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 5, fig.height = 3}
+toplot = d %>%
+  filter(type == "crit" & !(meaningprime == "oneshot") & meaningprime == "orthogonal_interpretation" & is.na(firstconj)) %>%
+  group_by(utteranceprime) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+ggplot(toplot, aes(x=utteranceprime,y=Mean)) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+  geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) + 
+  labs(x = "Priming condition", y = "Mean likelihood of exclusive inference") +
+  ggtitle("Interpretation of 'or' in orthogonal inference conditions")
+
+
+```
+
+A visual inspection of the results in the "exclusive interpretation" conditions reveals something interesting: while it was hypothesized that the *either-or* and *or, but not both* primes would decrease the strength of exclusivity inference relative to the no-prime baseline, the mean rating was actually higher in every condition relative to the baseline. For "exclusivity interpretation" conditions, a linear regression model was run to predict response on the final trial of the experiment (i.e. interpretation of *or*) from a fixed effect of priming condition, with the corresponding "no-prime" condition serving as the baseline. There was a weak positive effect of the *either-or* and *or, but not both* primes which approached significance (p < 0.1), and there was a significant positive effect of the *and* prime (p < 0.05). The same model was run for "orthogonal interpretation" conditions. Here, a positive effect of the *or, but not both* prime again approached significance, but the effect of the *either-or* and *and* primes was not significant. The analyses are detailed below: 
+
+```{r echo=TRUE, tidy=TRUE, tidy.opts=list(width.cutoff=60), message=FALSE, warning=FALSE}
+# Analyses
+
+model1 = lm(response ~ utteranceprime, data=d[d$type == "crit" & d$meaningprime == "exclusive_interpretation",])
+model2 = lm(response ~ utteranceprime, data=d[d$type == "crit" & d$meaningprime == "orthogonal_interpretation",])
+```
+
+In a post-hoc analysis, I investigated the extent to which, in "exclusivity interpretation" conditions, response on priming trials differed from response on the final trial. This was an interesting question to ask for *either-or* and *or, but not both* priming conditions, where the priming trials involved interpreting an explicitly exclusive disjunctive statement - before the participant was asked on the critical trial about the exclusivity about another (not explicitly exclusive) disjunctive statement. The following graph visualizes how mean behavior on priming trials differs from mean behavior on the critical trials in the *either-or* and *or, but not both* priming conditions. The graph also plots the mean response of each participant in the four priming trials and how this value changes for that participant between the priming trials and the critical trial. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 7, fig.height = 5}
+# toplot = d %>%
+#  filter(type == "crit" & !(meaningprime == "oneshot") & is.na(firstconj)) %>%
+#  group_by(utteranceprime,meaningprime) %>%
+#  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+#  ungroup() %>%
+#  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+dodge = position_dodge(.9)
+
+# ggplot(toplot, aes(x=utteranceprime,y=Mean,fill=meaningprime)) +
+  #geom_bar(stat="identity",position=dodge) +
+  #theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+  #geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25,position=dodge) + 
+  #labs(x = "Priming condition", y = "Mean likelihood of exclusive inference") #+
+  #ggtitle("Participants asked about orthogonal inference on priming trials")
+
+
+toplot_subjectvar = d %>%
+  filter((type == "crit" | type == "prime") & (meaningprime == "exclusive_interpretation") & is.na(firstconj) & ((utteranceprime == "eitherorprime") | (utteranceprime == "notbothprime"))) %>%
+  group_by(utteranceprime,type) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+toplot_subjectvar_bysubject = d %>%
+  filter((type == "crit" | type == "prime") & (meaningprime == "exclusive_interpretation") & is.na(firstconj) & ((utteranceprime == "eitherorprime") | (utteranceprime == "notbothprime"))) %>%
+  group_by(utteranceprime,type,workerid) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+toplot_subjectvar$type <- relevel(toplot_subjectvar$type, ref = "prime")
+
+ggplot(toplot_subjectvar, aes(x=type,y=Mean)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~utteranceprime) +
+  geom_line(data = toplot_subjectvar_bysubject, aes(group=workerid), color = "red", alpha = 0.5) + 
+  theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+  geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) +  
+  geom_point(data = toplot_subjectvar_bysubject) +
+  ggtitle("Change in behavior between priming and critical trials in exclusive \n inference conditions, broken down by subject") +
+  labs(x = "Trial type", y = "Mean likelihood of exclusive inference") +
+  scale_x_discrete(labels=c("Priming trials (mean)", "Critical trial"))# +
+  # labs(x = "Priming condition", y = "Mean likelihood of exclusive inference") + scale_fill_discrete(name = "Trial type", labels=c("priming trial", "critical trial (asked to interpret bare 'or')"))
+
+
+#exclude people based on performance in priming trials? 
+# in the either or condition, no strength asymmetry, trends toward effect on interpretation of or 
+# in the or but not both condition, strength asymmetry, marginally significant effect on interpretation of or 
+# new model: dependent measure is difference between prime trial and critical trial, for each prime trial 
+```
+
+Visual inspection of the results reveals that many participants behaved at (near) ceiling on average across the priming trials and in the critical trial, with very little differnce in behavior between the priming trials and critical trial. However, there did appear to be an overal difference (in the case of "or, but not both") in behavior on priming trials relative to the critical trial. A linear regression analysis was performed to investigate the effect of trial type on response within the "exclusivity inference", "or, but not both"-prime condition, and this model showed a significant and negative effect of mean response in the priming conditions on response in the critical condition (p < 0.05). No such effect was found in the "exclusivity inference", "either-or"-prime condition. 
+
+```{r eval=FALSE, include=FALSE}
+
+posthoc_tbl = d %>%
+  filter((type == "crit" | type == "prime") & (meaningprime == "exclusive_interpretation") & is.na(firstconj) & utteranceprime == "notbothprime") %>%
+  group_by(utteranceprime,type,workerid) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+posthoc_1 = lm(Mean ~ type, data =posthoc_tbl)
+
+```
+
+A final post-hoc analysis was performed to determine whether there were significant differences in interpration of "or" between participants who made distinctions between it and a prime ("either-or" or "or-but-not-both") and participants who did not make such a distinction. The rationale of this analysis was that it seemed possible that many participants were simply not paying enough attention to distinguish between priming trials and critical trials, but that the more a participant distinguished between the lexical item in priming trials and the lexical item *or* on the critical trial, the more we would expect to see an effect on the interpretation of *or* overall. A linear regression analysis was performed to investigate whether the difference between mean response in the priming conditions and response in the critical condition was a predictor of response in the critical condition. Data was restricted to participants from the "exclusivity inference", "or, but not both"-prime condition and the "exclusivity inference", "either-or"-prime condition. 
+
+```{r eval=FALSE, include=FALSE}
+
+posthoc_tbl_2 = d %>%
+  filter((type == "crit" | type == "prime") & (meaningprime == "exclusive_interpretation") & is.na(firstconj) & (utteranceprime == "notbothprime" | utteranceprime == "eitherorprime")) %>%
+  group_by(type,workerid) %>%
+  summarize(Mean = mean(response)) %>%
+  ungroup()
+
+posthoc_tbl_2 <- cast(posthoc_tbl_2, workerid~type)
+
+posthoc_tbl_2 = posthoc_tbl_2 %>%
+  group_by(workerid) %>%
+  summarize(diff = crit - prime,crit = crit) 
+
+posthoc_2 = lm(crit ~ diff, data =posthoc_tbl_2)
+
+```
+
+This model revealed that difference in response between the priming trials and critical trial was a significant predictor of response on the critical trial (p < 0.0001). (The code for all post-hoc analyses can be found in the markdown file of this document, accessible in the repository). 
+
+# Discussion 
+
+The results suggest that overall, the "exclusivity inference" conditions created a much more sensitive paradigm than did the "orthogonal inference" conditions, where there was little indication of an effect of any of the three primes on interpretation of *or*. Two posthoc analyses presented in the previous section furthermore suggest that to the extent that interpretation of *or* was affected by priming in the "exclusivity inference" conditions, this appears to have co-occurred with participants perceiving a strength asymmetry between the lexical prime and *or* (in the case of *either-or* and *or-but-not-both*). Perhaps repeated questioning about an exclusivity inference served as a prime in and of itself - in the sense that being asked about the exclusivity inference may have heightened participants' sensitivity to the manner in which disjunctive meanings were expressed. More empirical investigation is warranted, but there is promising evidence that participants who paid sufficient attention to the experiment showed an effect of prime by utterances not traditionally understood to be alternatives to *or*. 
+
+Future empirical work should also investigate whether similar effects can be elicited in different implicature paradigms, including *some*/*all*, cardinal numbers, and scalar adjectives. 
+
+# Appendix
+
+The below table summarizes behavior in the several conditions where there was no utterance prime:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+d[!(is.na(d$firstconj)),]$meaningprime <- "orthog_firstconj"
+
+toplot_noprime = d %>%
+  filter(type == "crit" & utteranceprime == "noprime") %>%
+  group_by(meaningprime) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+ggplot(toplot_noprime, aes(x=meaningprime,y=Mean)) +
+  geom_bar(stat="identity",position = "dodge") +
+  theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+  geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) + 
+  labs(x = "Priming condition", y = "Mean likelihood of exclusive inference") +
+  ggtitle("Behavior in the various 'no prime' conditions")
+```
+
+# References

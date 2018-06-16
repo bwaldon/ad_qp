@@ -38,7 +38,7 @@ Whether one subscribes to a (neo-)Gricean theory of scalar implicature - whereby
 
 Researchers on both sides of the scalar/structural divide have assumed that a main desideratum of a theory of alternatives should be to generate a finite and small set of alternatives for any utterance. For example, it is tacitly accepted that a theory of alternatives should help explain why a listener, upon hearing a speaker utter *John ate some of the cookies*, will (given the correct contextual preconditions) come to infer that it is not the case that John ate all of the cookies via the conversationally-stronger alternative *John ate all of the cookies*. However, there are other potential utterances which outrank *John ate some of the cookies* in terms of strength, including *John ate some but not all of the cookies*. But the negation of *John ate some but not all of the cookies* coupled with the negation of *John ate all of the cookies* leads to a contradictory inference; moreover, the negation of *John ate some but not all of the cookies* coupled with an assertion of *John ate some of the cookies* should lead the hearer to infer that, in fact, John ate all of the cookies. This conundrum illustrates what has been referred to in the implicature literature as the **symmetry problem**, and a successful theory is often assumed to be one that blocks *John ate some but not all of the cookies* as an alternative, thereby **breaking symmetry**. 
 
-There are other options for symmetry breaking that do not rely on the assumption that the set of alternatives is some finite and small set of utterances (of which, in e.g. the case of *some*, *some but not all* is presumed not to be a member). For example, `symmetric alternatives' are compatible with Rational Speech Act models of pragmatic competence; in fact, the RSA is conceptually (if not computationally) tractable on an assumption that listeners implicitly reason over *all* possible utterances in pragmatic interpretation (for more discussion, see my literature review on pragmatic alternatives in RSA: ). 
+There are other options for symmetry breaking that do not rely on the assumption that the set of alternatives is some finite and small set of utterances (of which, in e.g. the case of *some*, *some but not all* is presumed not to be a member). For example, `symmetric alternatives' are compatible with Rational Speech Act models of pragmatic competence; in fact, the RSA is conceptually (if not computationally) tractable on an assumption that listeners implicitly reason over *all* possible utterances in pragmatic interpretation (for more discussion, see my literature review on pragmatic alternatives in RSA: \url{https://bwaldon.github.io/ad_qp/alternatives.pdf}). 
 
 Moreover, there is a recent but growing body of psycholinguistic literature which suggests that scalar inference is modulated through exposure to sentences that are not traditionally understood to be in that finite set of alternatives for a given utterance [@kurumada2012pragmatic; @degentanenhaus; @NS2015]. For example, @NS2015 report that *or* and *either-or* only give rise to different behavior with respect to exclusivity inference (i.e. the upper-bounding `not-*and*' exclusivity implicature) when speakers are exposed to both of these utterances in the same context. In one between-subjects experiment performed by the authors, participants who were asked to rate the likelihood of an exclusivity reading given sentences containing \textit{or} behaved no differently from participants in a separate experimental condition who were asked to rate the likelihood of an exclusivity reading with \textit{either-or}. However, in a second experiment, where participants saw critical trials containing both \textit{or} and \textit{either-or}, there was an observed strength asymmetry between the two lexical items. 
 
@@ -162,6 +162,8 @@ In these cases, participants had to move the slider to the opposite end of the s
 
 This experiment was registered through the Open Science Foundation after it was run. The registration can be accessed here: \url{https://osf.io/e3tqu/}
 
+Lastly, a working prototype of the experiment can be accessed in this repository at \url{https://bwaldon.github.io/ad_qp/}. 
+
 ## Results 
 
 The following table provides the number of participants who responded in each condition of the experiment: 
@@ -189,7 +191,7 @@ The following table provides the number of participants who responded in each co
 
 I next present visualizations of how behavior on the final trial, which involved interpretation of a sentence containing (bare, unmodified) *or*, differed across conditions:
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 5, fig.height = 3}
 setwd("~/Documents/GitHub/ad_qp")
 d <- read.csv("results/pilot4_data.csv")
 
@@ -217,7 +219,9 @@ ggplot(toplot, aes(x=utteranceprime,y=Mean)) +
   geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) + 
   labs(x = "Priming condition", y = "Mean likelihood of exclusive inference") +
   ggtitle("Interpretation of 'or' in exclusivity inference conditions")
+```
 
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 5, fig.height = 3}
 toplot = d %>%
   filter(type == "crit" & !(meaningprime == "oneshot") & meaningprime == "orthogonal_interpretation" & is.na(firstconj)) %>%
   group_by(utteranceprime) %>%
@@ -301,7 +305,7 @@ ggplot(toplot_subjectvar, aes(x=type,y=Mean)) +
 
 Visual inspection of the results reveals that many participants behaved at (near) ceiling on average across the priming trials and in the critical trial, with very little differnce in behavior between the priming trials and critical trial. However, there did appear to be an overal difference (in the case of "or, but not both") in behavior on priming trials relative to the critical trial. A linear regression analysis was performed to investigate the effect of trial type on response within the "exclusivity inference", "or, but not both"-prime condition, and this model showed a significant and negative effect of mean response in the priming conditions on response in the critical condition (p < 0.05). No such effect was found in the "exclusivity inference", "either-or"-prime condition. 
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+```{r eval=FALSE, include=FALSE}
 
 posthoc_tbl = d %>%
   filter((type == "crit" | type == "prime") & (meaningprime == "exclusive_interpretation") & is.na(firstconj) & utteranceprime == "notbothprime") %>%
@@ -316,7 +320,7 @@ posthoc_1 = lm(Mean ~ type, data =posthoc_tbl)
 
 A final post-hoc analysis was performed to determine whether there were significant differences in interpration of "or" between participants who made distinctions between it and a prime ("either-or" or "or-but-not-both") and participants who did not make such a distinction. The rationale of this analysis was that it seemed possible that many participants were simply not paying enough attention to distinguish between priming trials and critical trials, but that the more a participant distinguished between the lexical item in priming trials and the lexical item *or* on the critical trial, the more we would expect to see an effect on the interpretation of *or* overall. A linear regression analysis was performed to investigate whether the difference between mean response in the priming conditions and response in the critical condition was a predictor of response in the critical condition. Data was restricted to participants from the "exclusivity inference", "or, but not both"-prime condition and the "exclusivity inference", "either-or"-prime condition. 
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+```{r eval=FALSE, include=FALSE}
 
 posthoc_tbl_2 = d %>%
   filter((type == "crit" | type == "prime") & (meaningprime == "exclusive_interpretation") & is.na(firstconj) & (utteranceprime == "notbothprime" | utteranceprime == "eitherorprime")) %>%
@@ -334,17 +338,19 @@ posthoc_2 = lm(crit ~ diff, data =posthoc_tbl_2)
 
 ```
 
-This model revealed that difference in response between the priming trials and critical trial was a significant predictor of response on the critical trial (p < 0.0001). 
+This model revealed that difference in response between the priming trials and critical trial was a significant predictor of response on the critical trial (p < 0.0001). (The code for all post-hoc analyses can be found in the markdown file of this document, accessible in the repository). 
 
 # Discussion 
 
+The results suggest that overall, the "exclusivity inference" conditions created a much more sensitive paradigm than did the "orthogonal inference" conditions, where there was little indication of an effect of any of the three primes on interpretation of *or*. Two posthoc analyses presented in the previous section furthermore suggest that to the extent that interpretation of *or* was affected by priming in the "exclusivity inference" conditions, this appears to have co-occurred with participants perceiving a strength asymmetry between the lexical prime and *or* (in the case of *either-or* and *or-but-not-both*). Perhaps repeated questioning about an exclusivity inference served as a prime in and of itself - in the sense that being asked about the exclusivity inference may have heightened participants' sensitivity to the manner in which disjunctive meanings were expressed. More empirical investigation is warranted, but there is promising evidence that participants who paid sufficient attention to the experiment showed an effect of prime by utterances not traditionally understood to be alternatives to *or*. 
 
+Future empirical work should also investigate whether similar effects can be elicited in different implicature paradigms, including *some*/*all*, cardinal numbers, and scalar adjectives. 
 
 # Appendix
 
 The below table summarizes behavior in the several conditions where there was no utterance prime:
 
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 d[!(is.na(d$firstconj)),]$meaningprime <- "orthog_firstconj"
 
 toplot_noprime = d %>%
