@@ -38,7 +38,7 @@ Whether one subscribes to a (neo-)Gricean theory of scalar implicature - whereby
 
 Researchers on both sides of the scalar/structural divide have assumed that a main desideratum of a theory of alternatives should be to generate a finite and small set of alternatives for any utterance. For example, it is tacitly accepted that a theory of alternatives should help explain why a listener, upon hearing a speaker utter *John ate some of the cookies*, will (given the correct contextual preconditions) come to infer that it is not the case that John ate all of the cookies via the conversationally-stronger alternative *John ate all of the cookies*. However, there are other potential utterances which outrank *John ate some of the cookies* in terms of strength, including *John ate some but not all of the cookies*. But the negation of *John ate some but not all of the cookies* coupled with the negation of *John ate all of the cookies* leads to a contradictory inference; moreover, the negation of *John ate some but not all of the cookies* coupled with an assertion of *John ate some of the cookies* should lead the hearer to infer that, in fact, John ate all of the cookies. This conundrum illustrates what has been referred to in the implicature literature as the **symmetry problem**, and a successful theory is often assumed to be one that blocks *John ate some but not all of the cookies* as an alternative, thereby **breaking symmetry**. 
 
-There are other options for symmetry breaking that do not rely on the assumption that the set of alternatives is some finite and small set of utterances (of which, in e.g. the case of *some*, *some but not all* is presumed not to be a member). For example, `symmetric alternatives' are compatible with Rational Speech Act models of pragmatic competence; in fact, the RSA is conceptually (if not computationally) tractable on an assumption that listeners implicitly reason over *all* possible utterances in pragmatic interpretation (for more discussion, see my literature review on pragmatic alternatives in RSA: \url{https://bwaldon.github.io/ad_qp/alternatives.pdf}). 
+There are other options for symmetry breaking that do not rely on the assumption that the set of alternatives is some finite and small set of utterances (of which, in e.g. the case of *some*, *some but not all* is presumed not to be a member). For example, `symmetric alternatives' are compatible with Rational Speech Act models of pragmatic competence; in fact, the RSA is conceptually (if not computationally) tractable on an assumption that listeners implicitly reason over *all* possible utterances in pragmatic interpretation (for more discussion, see my literature review on pragmatic alternatives in RSA: \url{https://bwaldon.github.io/ad_qp/writing/LINGUIST230B/alternatives.pdf}). 
 
 Moreover, there is a recent but growing body of psycholinguistic literature which suggests that scalar inference is modulated through exposure to sentences that are not traditionally understood to be in that finite set of alternatives for a given utterance [@kurumada2012pragmatic; @degentanenhaus; @NS2015]. For example, @NS2015 report that *or* and *either-or* only give rise to different behavior with respect to exclusivity inference (i.e. the upper-bounding `not-*and*' exclusivity implicature) when speakers are exposed to both of these utterances in the same context. In one between-subjects experiment performed by the authors, participants who were asked to rate the likelihood of an exclusivity reading given sentences containing \textit{or} behaved no differently from participants in a separate experimental condition who were asked to rate the likelihood of an exclusivity reading with \textit{either-or}. However, in a second experiment, where participants saw critical trials containing both \textit{or} and \textit{either-or}, there was an observed strength asymmetry between the two lexical items. 
 
@@ -162,7 +162,7 @@ In these cases, participants had to move the slider to the opposite end of the s
 
 This experiment was registered through the Open Science Foundation after it was run. The registration can be accessed here: \url{https://osf.io/e3tqu/}
 
-Lastly, a working prototype of the experiment can be accessed in this repository at \url{https://bwaldon.github.io/ad_qp/}. 
+Lastly, a working prototype of the experiment can be accessed in this repository at \url{https://bwaldon.github.io/ad_qp/experiments/or}. 
 
 ## Results 
 
@@ -193,7 +193,7 @@ I next present visualizations of how behavior on the final trial, which involved
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 5, fig.height = 3}
 setwd("~/Documents/GitHub/ad_qp")
-d <- read.csv("results/pilot4_data.csv")
+d <- read.csv("results/or/pilot4_data.csv")
 
 # Cleaning data
 
@@ -340,7 +340,7 @@ posthoc_2 = lm(crit ~ diff, data =posthoc_tbl_2)
 
 ```
 
-This model revealed that difference in response between the priming trials and critical trial was a significant predictor of response on the critical trial (p < 0.0001). (The code for all post-hoc analyses can be found in the markdown file of this document, accessible in the repository at \url{bwaldon.github.io/ad_qp/245_final_writeup.rmd}). 
+This model revealed that difference in response between the priming trials and critical trial was a significant predictor of response on the critical trial (p < 0.0001). (The code for all post-hoc analyses can be found in the markdown file of this document, accessible in the repository at \url{bwaldon.github.io/ad_qp/writing/LINGUIST245/245_final_writeup.rmd}). 
 
 # Discussion 
 
