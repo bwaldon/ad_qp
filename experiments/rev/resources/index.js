@@ -13,25 +13,25 @@
   var condit_dict = { 
       // EXCLUSIVITY INFERENCE TRIALS: PRIME OF FORM AND MEANING
       orprime_either : [
-      {type: "prime", id: "inherit", sentence: "Peter inherited the painting or the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "prime", id: "party", sentence: "Joanne invited David or Samantha to the party.", suggests: "Joanne invited only one of these two people to the party"},
       {type: "prime", id: "birthday", sentence: "Bill gave Mary flowers or chocolate for her birthday.", suggests: "Bill gave only one of these things to Mary for her birthday"},
       {type: "prime", id: "mail", sentence: "Jenny received a bill or an invitation in the mail today.", suggests: "Jenny received only one of these things in the mail today"},
       {type: "prime", id: "dealership", sentence: "Jack purchased a sports car or a truck at the dealership.", suggests: "Jack purchased only one of these things at the dealership"},
-      {type: "crit", id: "party", sentence: "Joanne invited either David or Samantha to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      {type: "crit", id: "inherit", sentence: "Peter inherited either the painting or the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
       ], 
       orprime_notboth : [
-      {type: "prime", id: "inherit", sentence: "Peter inherited the painting or the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "prime", id: "party", sentence: "Joanne invited David or Samantha to the party.", suggests: "Joanne invited only one of these two people to the party"},
       {type: "prime", id: "birthday", sentence: "Bill gave Mary flowers or chocolate for her birthday.", suggests: "Bill gave only one of these things to Mary for her birthday"},
       {type: "prime", id: "mail", sentence: "Jenny received a bill or an invitation in the mail today.", suggests: "Jenny received only one of these things in the mail today"},
       {type: "prime", id: "dealership", sentence: "Jack purchased a sports car or a truck at the dealership.", suggests: "Jack purchased only one of these things at the dealership"},
-      {type: "crit", id: "party", sentence: "Joanne invited David or Samantha to the party, but not both.", suggests: "Joanne invited only one of these two people to the party"},
+      {type: "crit", id: "inherit", sentence: "Peter inherited the painting or the wardrobe from his grandmother, but not both.", suggests: "Peter inherited only one of these things from his grandmother"},
       ], 
       orprime_and : [
-      {type: "prime", id: "inherit", sentence: "Peter inherited the painting or the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
+      {type: "prime", id: "party", sentence: "Joanne invited David or Samantha to the party.", suggests: "Joanne invited only one of these two people to the party"},
       {type: "prime", id: "birthday", sentence: "Bill gave Mary flowers or chocolate for her birthday.", suggests: "Bill gave only one of these things to Mary for her birthday"},
       {type: "prime", id: "mail", sentence: "Jenny received a bill or an invitation in the mail today.", suggests: "Jenny received only one of these things in the mail today"},
       {type: "prime", id: "dealership", sentence: "Jack purchased a sports car or a truck at the dealership.", suggests: "Jack purchased only one of these things at the dealership"},
-      {type: "crit", id: "party", sentence: "Joanne invited David and Samantha to the party.", suggests: "Joanne invited only one of these two people to the party"},
+      {type: "crit", id: "inherit", sentence: "Peter inherited the painting and the wardrobe from his grandmother.", suggests: "Peter inherited only one of these things from his grandmother"},
       ], 
       // // ORTHOGONAL INFERENCE TRIALS: NO FORM PRIME, NO MEANING PRIME
       // or_eitherorprime_orthog : [
