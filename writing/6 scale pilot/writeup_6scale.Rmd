@@ -1,0 +1,147 @@
+---
+title: "Pilot results: extending the priming experiment to more scales" 
+author: "Brandon Waldon"
+date: "July 3, 2015"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+fig_width: 6 
+fig_height: 4 
+header-includes:
+  - \usepackage{hyperref} 
+  - \usepackage{graphicx}
+fontsize: 12pt
+# bibliography: refs.bib
+---
+
+This is an update on my attempt to extend the experimental paradigm developed in LINGUIST 245 to more scales. There are now stimuli for 6 different scales, as detailed below. For every scale, I have developed 3 priming sentences which are changed according to experimental condition to include, a strong alternative (e.g. *all* to *some*), an exhaustive prime (e.g. *some but not all*), or no prime. In each of the priming sentences, participants are asked about the likelihood of an intended exhaustive interpretation (as illustrated below). This is also true for one critical sentence, developed for each scale, which includes the weak scalar item (e.g. *some*). 
+
+# Scales: 
+
+## 'Some'
+- Stronger alternative: 'all'
+- Exhaustive prime: 'some but not all' 
+- Interpretation question: "not every..."
+- Example priming sentence: **Sally saw some but not all of her former classmates at her high school reunion**
+- Example sentence, no prime condition: **Sally saw her favorite teacher, Mr. Meyer, at her high school reunion.**
+- Exhaustivity interpretation question: *Sally didn't see every former classmate of hers at the reunion*
+
+## 'Or'
+- Stronger alternative: 'and'
+- Exhaustive prime: 'or but not both' 
+- Interpretation question: "only one of these things..."
+- Example priming sentence: **Peter inherited the painting or the wardrobe from his grandmother, but not both**
+- Example sentence, no prime condition: **Peter inherited the painting from his grandmother, whereas his aunt Jill inherited the wardrobe.** 
+- Exhaustivity interpretation question: *Peter inherited only one of these things from his grandmother*
+
+## 'Looks like'
+- Stronger alternative: 'is'
+- Exhaustive prime: 'looks like, but isn't' 
+- Interpretation question: "something other than..."
+- Example priming sentence: **It looks like it's raining outside, but it isn't.**
+- Example sentence, no prime condition: **It's snowing outside.**
+- Exhaustivity interpretation question: *The weather outside is something other than rain*
+
+## Cardinal numbers (i.e. 34)
+- Stronger alternative: '35'
+- Exhaustive prime: 'exactly 34' 
+- Interpretation question: "no more than 34..."
+- Example priming sentence: **Exactly 34 books were stolen from the local library yesterday.**
+- Example sentence, no prime condition: **There was a break-in at the local library yesterday.**
+- Exhaustivity interpretation question: *No more than 34 books were stolen from the local library yesterday*
+
+## 'Palatable'
+- Stronger alternative: 'delicious'
+- Exhaustive prime: 'palatable, but not delicious'
+- Interpretation question: "not exceptionally tasty..."
+- Example priming sentence: **Guillermo's brewery has just released a new beer that is palatable, but not delicious.**
+- Example sentence, no prime condition: **Guillermo's brewery has just released a new beer.**
+- Exhaustivity interpretation question: *Guillermo's brewery has just released a new beer that is not exceptionally tasty*
+
+## 'Hard'
+- Stronger alternative: 'unsolvable'
+- Exhaustive prime: 'hard, but not unsolvable' 
+- Interpretation question: "not impossible to..."
+- Example priming sentence: **The homework that Professor Bridges assigns is hard, but not unsolvable.**
+- Example sentence, no prime condition: **The homework that Professor Bridges assigns is always due the Monday after it is assigned.**
+- Exhaustivity interpretation question: *The homework that Professor Bridges assigns is not impossible to finish*
+
+# Pilot study
+
+In a (partially unsuccessful due to programming errors\footnote{results from the 'palatable' and 'hard' scales were merged}) pilot, I created three experiment lists such that every list elicited interpretation of the weak scalar item from each scale above. That is, every participant interpreted *some*, *or*, *looks like*, etc. Moreover, the lists were balanced such that data could be collected between-subjects for the effect of each type of prime on each scalar item. For example, in one list, participants were asked about their interpretation of *or* after seeing three exhaustive primes, *some* after seeing three strong primes, *looks like* after seeing three 'no prime' sentences, etc. For a given scale, the critical trial was shown immedately after the three corresponding prime trials, but the order of these groups of priming/critical trials was randomized within-subject. I recruited 30 participants to take this initial pilot. A working version is available at \url{https://bwaldon.github.io/ad_qp/experiments/6scale/}. 
+
+## Results 
+
+Because of a really basic coding error, I can't distinguish between data from the 'palatable' and 'hard' scale trials (but I've fixed it for future runs!). However, here's a visualization of the results of the experiments from the other four scales. The below graph shows how interpretation of the weak scalar item on the critical trial changes depending on the nature of the priming trials for that scalar item. Of course, due to the incredibly low statistical power (as well as the fact that some data is missing), these results are very preliminary. 
+
+```{r include=FALSE}
+library(tidyverse)
+library(bootstrap)
+library(formatR)
+library(reshape)
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
+```
+
+```{r echo=FALSE}
+setwd("~/Documents/GitHub/ad_qp")
+d <- read.csv("results/6scale/6scale_anonymized.csv",header = TRUE, stringsAsFactors = FALSE)
+
+d <- data.frame(lapply(d, function(x) {
+  gsub('"', '', x)
+}))
+
+d <- data.frame(lapply(d, function(x) {
+  gsub('\\\\', '', x)
+}))
+
+levels(d$target) <- c("none","some","or","n","lookslike", "tasty", "hard")
+
+d[d$id %in% c("reunion","vote","yoga","football"),]$target <- "some"
+d[d$id %in% c("inherit","birthday","mail","party"),]$target <- "or"
+d[d$id %in% c("rain","car","son","golden"),]$target <- "lookslike"
+d[d$id %in% c("library","cookies","chairs","bus"),]$target <- "n"
+d[d$id %in% c("homework","hospital"),]$target <- "hard"
+d[d$id %in% c("foodtruck","beer","wine","indian"),]$target <- "tasty"
+
+d$utteranceprime <- 0
+
+d[d$target == "or" & d$Answer.list == "list1",]$utteranceprime <- "exhaustive"
+d[d$target == "or" & d$Answer.list == "list2",]$utteranceprime <- "noprime"
+d[d$target == "or" & d$Answer.list == "list3",]$utteranceprime <- "strong_alternative"
+
+d[d$target == "some" & d$Answer.list == "list1",]$utteranceprime <- "strong_alternative"
+d[d$target == "some" & d$Answer.list == "list2",]$utteranceprime <- "exhaustive"
+d[d$target == "some" & d$Answer.list == "list3",]$utteranceprime <- "noprime"
+
+d[d$target == "lookslike" & d$Answer.list == "list1",]$utteranceprime <- "noprime"
+d[d$target == "lookslike" & d$Answer.list == "list2",]$utteranceprime <- "strong_alternative"
+d[d$target == "lookslike" & d$Answer.list == "list3",]$utteranceprime <- "exhaustive"
+
+d[d$target == "n" & d$Answer.list == "list1",]$utteranceprime <- "exhaustive"
+d[d$target == "n" & d$Answer.list == "list2",]$utteranceprime <- "noprime"
+d[d$target == "n" & d$Answer.list == "list3",]$utteranceprime <- "strong_alternative"
+
+d$response <- as.numeric(d$response) / 100
+
+toplot <- d %>% 
+  filter(target %in% c("or","some","lookslike","n") & type == "crit") %>%
+  group_by(target, utteranceprime) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+ggplot(toplot, aes(x=utteranceprime,y=Mean)) +
+  facet_wrap(~target) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+  geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) + 
+  labs(x = "Prime", y = "Interpretation (1 = maximum exhaustivity inference)") +
+  ggtitle("Strength of exhaustivity interpretations on critical trial by prime type")
+```
+

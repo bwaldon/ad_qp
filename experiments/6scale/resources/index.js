@@ -172,10 +172,10 @@ var tasty_no = [
 
 var hard_exh = [
 
-{type: "prime", primetype : "exh", target : "tasty", id: "homework", sentence: "The homework that Professor Bridges assigns is hard, but not unsolvable.", suggests: "The homework that Professor Bridges assigns is not impossible to finish"},
-{type: "prime", primetype : "exh", target : "tasty", id: "hospital", sentence: "Designing a new hospital in Hiram's hometown is a hard but not unsolvable problem.", suggests: "Designing a new hospital in Hiram's hometown is not an impossible problem to solve"},
-{type: "prime", primetype : "exh", target : "tasty", id: "wine", sentence: "For Tamir and Frances, the issue of how to pay for their children's education is hard but not unsolvable.", suggests: "For Tamir and Frances, the issue of how to pay for their children's education not impossible to overcome"},
-{type: "crit", primetype : "na", target : "tasty", id: "indian", sentence: "The final asssignment in Harrison's calculus class is hard.", suggests: "The final asssignment in Harrison's calculus class is not impossible to complete"},
+{type: "prime", primetype : "exh", target : "hard", id: "homework", sentence: "The homework that Professor Bridges assigns is hard, but not unsolvable.", suggests: "The homework that Professor Bridges assigns is not impossible to finish"},
+{type: "prime", primetype : "exh", target : "hard", id: "hospital", sentence: "Designing a new hospital in Hiram's hometown is a hard but not unsolvable problem.", suggests: "Designing a new hospital in Hiram's hometown is not an impossible problem to solve"},
+{type: "prime", primetype : "exh", target : "hard", id: "education", sentence: "For Tamir and Frances, the issue of how to pay for their children's education is hard but not unsolvable.", suggests: "For Tamir and Frances, the issue of how to pay for their children's education not impossible to overcome"},
+{type: "crit", primetype : "na", target : "hard", id: "calculus", sentence: "The final asssignment in Harrison's calculus class is hard.", suggests: "The final asssignment in Harrison's calculus class is not impossible to complete"},
 
 ];
 
@@ -183,10 +183,10 @@ var hard_exh = [
 
 var hard_str = [
 
-{type: "prime", primetype : "str", target : "tasty", id: "homework", sentence: "The homework that Professor Bridges assigns is unsolvable.", suggests: "The homework that Professor Bridges assigns is not impossible to finish"},
-{type: "prime", primetype : "str", target : "tasty", id: "hospital", sentence: "Designing a new hospital in Hiram's hometown is an unsolvable problem.", suggests: "Designing a new hospital in Hiram's hometown is not an impossible problem to solve"},
-{type: "prime", primetype : "str", target : "tasty", id: "wine", sentence: "For Tamir and Frances, the issue of how to pay for their children's education is unsolvable.", suggests: "For Tamir and Frances, the issue of how to pay for their children's education not impossible to overcome"},
-{type: "crit", primetype : "na", target : "tasty", id: "indian", sentence: "The final asssignment in Harrison's calculus class is hard.", suggests: "The final asssignment in Harrison's calculus class is not impossible to complete"},
+{type: "prime", primetype : "str", target : "hard", id: "homework", sentence: "The homework that Professor Bridges assigns is unsolvable.", suggests: "The homework that Professor Bridges assigns is not impossible to finish"},
+{type: "prime", primetype : "str", target : "hard", id: "hospital", sentence: "Designing a new hospital in Hiram's hometown is an unsolvable problem.", suggests: "Designing a new hospital in Hiram's hometown is not an impossible problem to solve"},
+{type: "prime", primetype : "str", target : "hard", id: "education", sentence: "For Tamir and Frances, the issue of how to pay for their children's education is unsolvable.", suggests: "For Tamir and Frances, the issue of how to pay for their children's education not impossible to overcome"},
+{type: "crit", primetype : "na", target : "hard", id: "calculus", sentence: "The final asssignment in Harrison's calculus class is hard.", suggests: "The final asssignment in Harrison's calculus class is not impossible to complete"},
 
 ];
 
@@ -194,10 +194,10 @@ var hard_str = [
 
 var hard_no = [
 
-{type: "prime", primetype : "no", target : "tasty", id: "homework", sentence: "The homework that Professor Bridges assigns is always due the Monday after it is assigned.", suggests: "The homework that Professor Bridges assigns is not impossible to finish"},
-{type: "prime", primetype : "no", target : "tasty", id: "hospital", sentence: "Designing a new hospital in Hiram's hometown has been a government priority for several years.", suggests: "Designing a new hospital in Hiram's hometown is not an impossible problem to solve"},
-{type: "prime", primetype : "no", target : "tasty", id: "wine", sentence: "Tamir and Frances have given lots of thought to how they will pay for their children's education.", suggests: "For Tamir and Frances, the issue of how to pay for their children's education not impossible to overcome"},
-{type: "crit", primetype : "na", target : "tasty", id: "indian", sentence: "The final asssignment in Harrison's calculus class is hard.", suggests: "The final asssignment in Harrison's calculus class is not impossible to complete"},
+{type: "prime", primetype : "no", target : "hard", id: "homework", sentence: "The homework that Professor Bridges assigns is always due the Monday after it is assigned.", suggests: "The homework that Professor Bridges assigns is not impossible to finish"},
+{type: "prime", primetype : "no", target : "hard", id: "hospital", sentence: "Designing a new hospital in Hiram's hometown has been a government priority for several years.", suggests: "Designing a new hospital in Hiram's hometown is not an impossible problem to solve"},
+{type: "prime", primetype : "no", target : "hard", id: "education", sentence: "Tamir and Frances have given lots of thought to how they will pay for their children's education.", suggests: "For Tamir and Frances, the issue of how to pay for their children's education not impossible to overcome"},
+{type: "crit", primetype : "na", target : "hard", id: "calculus", sentence: "The final asssignment in Harrison's calculus class is hard.", suggests: "The final asssignment in Harrison's calculus class is not impossible to complete"},
 
 ];
 

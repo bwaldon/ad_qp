@@ -1,0 +1,190 @@
+---
+title: "Priming interpretation of (putative) semantically-exclusive disjunctive terms 'either-or' and 'or, but not both'" 
+author: "Brandon Waldon"
+date: "July 3, 2015"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+header-includes:
+  - \usepackage{hyperref} 
+  - \usepackage{graphicx}
+fontsize: 12pt
+bibliography: refs.bib
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(bootstrap)
+library(formatR)
+library(reshape)
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
+```
+
+Recall that the experiment I presented for LINGUIST 245\footnote{(Writeup accessible at \url{bwaldon.github.io/ad_qp/writing/LINGUIST245/245_final_writeup.pdf}.)} (henceforth **EXPERIMENT 1**) was an investigation of whether exposure to constructions such as \textit{either-or} and \textit{or, but not both} can prime interpretation of disjunctive \textit{or}. In that experiment, the following design was used: 
+
+\begin{itemize}
+
+\item Participants saw four priming sentences, all containing the same of one of the following construction: \textit{either-or}, \textit{or, but not both}, or \textit{and}. In one additional "no-prime" condition, the construction was \textit{whereas}. 
+
+\item In one experimental manipulation, participants were asked on each priming trial whether the sentence suggested an \textbf{exclusive} meaning; in another manipulation, participants were asked about some other inference (this condition was called the \textbf{orthogonal} interpretation condition). 
+
+\item In both the \textbf{exclusive} and \textbf{orthogonal} experimental conditions, participants then saw a sentence containing bare \textit{or} and were asked to assess whether the sentence suggested an \textbf{exclusive} meaning (this was the critical trial of the experiment).
+
+\end{itemize}
+
+
+
+\begin{figure}[h!]
+  \caption{The critical trial in all conditions of the experiment}
+  \begin{center}
+  \includegraphics[width=0.75\textwidth]{screenshot}
+  \end{center}
+\end{figure}
+
+
+A quick, non-exhaustive summary of the results of **EXPERIMENT 1**: with the data from \textbf{exclusive} conditions, a linear regression model was run to predict response on the critical trial of the experiment (i.e. interpretation of *or*) from a fixed effect of priming condition, with the corresponding "no-prime" condition serving as the baseline. There was a weak positive effect of the *either-or* and *or, but not both* primes which approached significance, and there was a significant positive effect of the *and* prime. 
+
+In the present experiment (henceforth **EXPERIMENT 2**), I ask the reverse of the question posed above: that is, I ask whether bare \textit{or} can prime interpretation of \textit{either-or} and \textit{or, but not both}. This would, of course, be a surprising result, as \textit{either-or} and \textit{or, but not both} both putatively receive exclusive interpretations on their semantics, absent any pragmatic enrichment. Given this understanding of the meaning of these expressions, we should not affect the strength of exclusivity inferences to be modulated by priming from a putatively 'weak' disjunctive expresion (i.e. bare \textit{or}). 
+
+# Design and procedure of **EXPERIMENT 2** 
+
+\begin{itemize}
+
+\item Participants saw four priming sentences, all containing bare \textit{or}.
+
+\item For the purposes of this experiment, participants were always asked on each priming trial whether the sentence suggested an \textbf{exclusive} meaning.
+
+\item Participants then saw the critical trial of the experiment sentence, which contained \textit{and}, \textit{either-or}, or \textit{or, but not both}. The critical sentence was always some variation of the following sentence, which had appeared as a priming sentence in \textbf{EXPERIMENT 1} (that is, prior to exposure to a sentence containing bare \textit{or}): 
+
+\begin{center}
+[Peter inherited either the painting or the wardrobe from his grandmother.] / [Peter inherited the painting or the wardrobe from his grandmother, but not both.] / [Peter inherited the painting and the wardrobe from his grandmother.]
+\end{center}
+\end{itemize}
+
+90 participants were recruited through MTurk for this experiment. A working version of the experiment is available at \url{https://bwaldon.github.io/ad_qp/experiments/rev/}.
+
+# Results and discussion
+
+In the following table, I show how the interpretation of the critical sentence in **EXPERIMENT 2** compares to the interpretation of that same sentence in exclusivity conditions of **EXPERIMENT 1**, where the sentence appeared as a priming trial. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+setwd("~/Documents/GitHub/ad_qp")
+d_orig <- read.csv("results/or/pilot4_data.csv")
+d_rev <- read.csv("results/or/pilot5_data.csv")
+
+# cleaning and transforming data 
+d_orig$meaningprime = sapply(strsplit(as.character(d_orig$Answer.condition),"_"), "[", 3)
+d_orig[d_orig$meaningprime == "exclu",]$meaningprime <- "exclusive_interpretation" 
+d_orig[d_orig$meaningprime == "exlcu",]$meaningprime <- "exclusive_interpretation" #typo from experiment collection
+d_orig[d_orig$meaningprime == "orthog",]$meaningprime <- "orthogonal_interpretation" 
+d_orig$utteranceprime = sapply(strsplit(as.character(d_orig$Answer.condition),"_"), "[", 2)
+d_orig$firstconj = sapply(strsplit(as.character(d_orig$Answer.condition),"_"), "[", 4)
+
+d_orig <- d_orig %>% 
+  filter(meaningprime == "exclusive_interpretation")
+
+d_orig_summary = d_orig %>%
+  filter(id == "inherit" & is.na(firstconj)) %>%
+  group_by(utteranceprime) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+d_rev <- data.frame(lapply(d_rev, function(x) {
+            gsub('"', '', x)
+             }))
+
+d_rev <- data.frame(lapply(d_rev, function(x) {
+  gsub('\\\\', '', x)
+}))
+
+d_rev$utteranceprime = sapply(strsplit(as.character(d_rev$Answer.condition),"_"), "[", 2)
+
+d_orig[d_orig$utteranceprime == "andprime",]$utteranceprime <- "and" 
+d_orig[d_orig$utteranceprime == "eitherorprime",]$utteranceprime <- "either" 
+d_orig[d_orig$utteranceprime == "notbothprime",]$utteranceprime <- "notboth" 
+d_orig$utteranceprime <- factor(d_orig$utteranceprime)
+
+d_rev$utteranceprime <- factor(d_rev$utteranceprime)
+
+d_rev$response <- as.numeric(d_rev$response) / 100
+
+d_rev$primeorder <- "EXPERIMENT_2"
+d_orig$primeorder <- "EXPERIMENT_1"
+
+d_rev_summary = d_rev %>%
+  filter(id == "inherit") %>%
+  group_by(utteranceprime) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+d_rev$workerid <- as.integer(d_rev$workerid)
+
+d_orig <- d_orig[,c("workerid","response","utteranceprime","primeorder","type","id")]
+d_rev <- d_rev[,c("workerid","response","utteranceprime","primeorder","type","id")]
+
+d <- full_join(d_rev,d_orig)
+
+# visualization
+
+toplot = d %>%
+  filter(id == "inherit" & !(utteranceprime == "noprime") ) %>%
+  group_by(primeorder,utteranceprime) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+ggplot(toplot, aes(x=primeorder,y=Mean)) +
+  facet_wrap(~utteranceprime) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+  geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) + 
+  labs(x = "Experiment", y = "Interpretation (1 = maximum exclusivity inference)") +
+  ggtitle("Change in exclusive interpretation of 'and', 'either-or', and \n'or, but not both' between EXPERIMENT 1 and EXPERIMENT 2")
+```
+
+One caveat in this discussion is that because **EXPERIMENT 1** and **EXPERIMENT 2** were run at different times, the results of the two experiments are not directly comparable. But the visual trend of the results appears to suggest that in **EXPERIMENT 2**, exposure to bare *or* depressed the strength of exclusivity interpretation of *either-or* and *or, but not both* on the critical trial, relative to the interpretation of these constructions in **EXPERIMENT 1** (where these constructions appeared before exposure to *or*, as sentences in priming trials). 
+
+I next investigate how behavior within **EXPERIMENT 2** changed between the (bare *or*) priming trials and the critical trial. The following table is a visualization of how average behavior on *or* interpretation trials differed from behavior on *and*, *either-or* and *or, but not both*. The graph also plots the mean response of each participant in the four *or* priming trials and how this value changes for that participant between the priming trials and the critical trial: 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+dodge = position_dodge(.9)
+
+toplot_subjectvar = d_rev %>%
+  filter(!(type == "filler")) %>% 
+  group_by(utteranceprime,type) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+toplot_subjectvar_bysubject = d_rev %>%
+  filter(!(type == "filler")) %>%
+  group_by(utteranceprime,type,workerid) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+toplot_subjectvar$type <- relevel(toplot_subjectvar$type, ref = "prime")
+
+ggplot(toplot_subjectvar, aes(x=type,y=Mean)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~utteranceprime) +
+  geom_line(data = toplot_subjectvar_bysubject, aes(group=workerid), color = "red", alpha = 0.5) + 
+  theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+  geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) +  
+  geom_point(data = toplot_subjectvar_bysubject) +
+  ggtitle("Change in behavior between priming and critical trials in exclusive \n inference conditions, broken down by subject") +
+  labs(x = "Trial type", y = "Interpretation (1 = maximum exclusivity inference)") +
+  scale_x_discrete(labels=c("'Or' priming\n trials (mean)", "Critical trial"))
+```
+
+A visual inspection of the results suggests that many but not all participants demonstrated asymmetric behavior between the priming and critical trials in the *either-or* and *or, but not both* conditions. In these conditions, there appears to be a slight increase in exclusivity interpretation - though again, the overall mean exclusivity interpretation for *either-or* and *or, but not both* decreased between **EXPERIMENT 1** and **EXPERIMENT 2**. 
+
