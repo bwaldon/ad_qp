@@ -5,37 +5,37 @@
 
 var list1 = [ 
 
-{type: "crit", primetype : "only", inference_question: "upperbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday, and he talked to only some of the girls in his class today.", suggests: "John didn't talk to every girl in his class yesterday."},
+{type: "crit", primetype : "only", inference_question: "upperbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday, and he talked to only some of the girls in his class today.", suggests: "John didn't talk to every girl in his class yesterday"},
 
 ];
 
 var list2 = [
 
-{type: "crit", primetype : "none", inference_question: "upperbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday.", suggests: "John didn't talk to every girl in his class yesterday."},
+{type: "crit", primetype : "none", inference_question: "upperbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday.", suggests: "John didn't talk to every girl in his class yesterday"},
 
 ];
 
 var list3 = [
 
-{type: "crit", primetype : "notall", inference_question: "upperbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday, and he talked to some but not all of the girls in his class today.", suggests: "John didn't talk to every girl in his class yesterday."},
+{type: "crit", primetype : "notall", inference_question: "upperbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday, and he talked to some but not all of the girls in his class today.", suggests: "John didn't talk to every girl in his class yesterday"},
 
 ];
 
 var list4 = [ 
 
-{type: "crit", primetype : "only", inference_question: "lowerbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday, and he talked to only some of the girls in his class today.", suggests: "John talked to every girl in his class yesterday."},
+{type: "crit", primetype : "only", inference_question: "lowerbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday, and he talked to only some of the girls in his class today.", suggests: "John talked to every girl in his class yesterday"},
 
 ];
 
 var list5 = [
 
-{type: "crit", primetype : "none", inference_question: "lowerbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday.", suggests: "John talked to every girl in his class yesterday."},
+{type: "crit", primetype : "none", inference_question: "lowerbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday.", suggests: "John talked to every girl in his class yesterday"},
 
 ];
 
 var list6 = [
 
-{type: "crit", primetype : "notall", inference_question: "lowerbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday, and he talked to some but not all of the girls in his class today.", suggests: "John talked to every girl in his class yesterday."},
+{type: "crit", primetype : "notall", inference_question: "lowerbounded", target : "some", id: "girls", sentence: "John talked to some of the girls in his class yesterday, and he talked to some but not all of the girls in his class today.", suggests: "John talked to every girl in his class yesterday"},
 
 ];
 
