@@ -1,0 +1,127 @@
+---
+title: "Experimenting with contextually-activated alternatives"
+author: "Brandon Waldon"
+date: "August 2, 2018 (Handout for Judith)"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+header-includes: 
+  - \usepackage{gb4e}
+  - \usepackage{hyperref}
+  - \noautomath # Solves Tex Capacity problems associated with gb4e
+bibliography: refs.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(bootstrap)
+library(formatR)
+library(reshape)
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
+```
+
+# Background and motivation
+
+* Pilot experiment addresses an empirical claim made in @Katzir2007, namely that sentences such as (\ref{ex1}) give rise to an uncertainty inference regarding the first conjunct (i.e. speaker does not know whether John spoke to all of the girls yesterday) (example taken from @Katzir2007, his example 14a):
+\begin{exe}
+\ex\label{ex1} John talked to some of the girls yesterday, and he talked to some but not all of the girls today.
+\end{exe}
+
+* Katzir's analysis: (\ref{ex1}) activates the following symmetric alternatives, and cancelling symmetric alternatives in tandem gives rise to uncertainty (building off an analysis proposed by @sauerland2004scalar):
+\begin{exe}
+\ex\label{ex2} John talked to \textbf{all} of the girls yesterday, and he talked to some but not all of the girls today.
+\ex\label{ex3} John talked to \textbf{some but not all} of the girls yesterday, and he talked to some but not all of the girls today.
+\end{exe}
++ On Katzir's analysis, (\ref{ex2}) is activated as an alternative to (\ref{ex1}) because it is structurally simpler than (\ref{ex1}). On a monotonicity-based account (c.f. @Matsumoto1995), the alternative is activated due to the scale-mate relationship between *some* and *all*. 
++ Katzir derives (\ref{ex3}) as an alternative to (\ref{ex1}) with this same structural-complexity principle (because *some but not all* is a subtree of \ref{ex1}, it may substitute *some* in the first conjunct of \ref{ex1} to yield \ref{ex3}).\footnote{Strictly speaking, Matsumoto doesn't discuss data such as (\ref{ex1}), but Katzir imagines an extension of Matsumoto's analysis whereby (\ref{ex3}) is activated in context due to the strength asymmetery between \textit{some but not all} and \textit{some}, plus the presence of \textit{some but not all} in the discourse - building off Matsumoto's discussion of data such as the following: 
+\begin{itemize}
+\item It was warm yesterday, and it is a little more than warm today.
+\end{itemize}}
+
+## Significance
+
+* If (\ref{ex2}) and (\ref{ex3}) are indeed both active as alternatives to (\ref{ex1}), and if we are committed to an analysis of SI as a categorical, all-or-nothing phenomenon, then we make a prediction that (\ref{ex2}) and (\ref{ex3}) should have the same pragmatic status when it comes to reasoning about (\ref{ex1}). 
+
+* This constrains our range of possible empirical predictions vis a vis intuitions about (\ref{ex1}). If (\ref{ex1}) activates symmetric alternatives, we are forced to say that the pragmatically-enriched (\ref{ex1}) is either a contradiction or - along the lines of @sauerland2004scalar - that it gives rise to uncertainty inferences. 
+
+* But if we treat SI as a more gradient, continuous phenomenon, we can privilege certain alternatives over others by, e.g., manipulating the prior over utterances or cost function in an RSA analysis - thereby breaking symmetry. For example, we might imagine that the more prolix (\ref{ex3}) is a lower-probability (or higher-cost) utterance than (\ref{ex2}). Setting the parameters in this particular way predicts that an upper-bounded inference should be available for the first conjunct of (\ref{ex1}). 
+
+# Methods
+
+* Have a look at the experiment here: \url{https://bwaldon.github.io/ad_qp/experiments/conj/index.html}
+
+* Participants: 160 participants on MTurk (US IP addresses, >95% approval)
+
+* Materials: A 'one-off' version of the experimental paradigm I used in 245 (**bolded** sentence (the target item), followed on a separate line by the text "How likely is it that the speaker meant to suggest", followed on a separate line by an *italicized* sentence - slider scale endpointed by "very unlikely" and "very likely"), with two training trials followed by one of six sentence pairs: 
+
+* In 3 conditions: participants asked about an upper-bounded inference: 
+  + **John talked to some of the girls in his class yesterday, and he talked to only some of the girls in his class today.** (suggests) *John didn't talk to every girl in his class yesterday* 
+  + **John talked to some of the girls in his class yesterday, and he talked to some but not all of the girls in his class today.** (suggests) *John didn't talk to every girl in his class yesterday*
+  + **John talked to some of the girls in his class yesterday.** (suggests) *John didn't talk to every girl in his class yesterday*
+
+* In 3 conditions: participants asked about inclusive inference:
+  + **John talked to some of the girls in his class yesterday, and he talked to only some of the girls  in his class today.** (suggests) *John talked to every girl in his class yesterday*
+  + **John talked to some of the girls in his class yesterday, and he talked to some but not all of the girls in his class today.** (suggests) *John talked to every girl in his class yesterday*
+  + **John talked to some of the girls in his class yesterday.** (suggests) *John talked to every girl in his class yesterday*
+
+... So conditions held constant the structure of the first conjunct (i.e. always contained bare *some*) but varied as to whether the second conjunct contained **only some**, **some but not all**, or was completely absent. 
+
+# Results (without exclusions from training trials)
+
+```{r echo=FALSE}
+setwd("~/Documents/GitHub/ad_qp")
+d <- read.csv("results/conj/conj_anonymized.csv")
+
+d <- data.frame(lapply(d, function(x) {
+  gsub('"', '', x)
+}))
+
+d <- data.frame(lapply(d, function(x) {
+  gsub('\\\\', '', x)
+}))
+
+d$response <- as.numeric(d$response)
+
+means <- d %>% 
+  filter(type == "crit") %>%
+  group_by(primetype,inference_question) %>%
+  summarize(Mean = mean(response), n = n())
+
+dodge = position_dodge(.9)
+
+
+toplot = d %>%
+  filter(type == "crit") %>%
+  group_by(primetype, inference_question) %>%
+  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+  ungroup() %>%
+  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+
+ggplot(toplot, aes(x=primetype,y=Mean,fill = inference_question)) +
+  geom_bar(stat="identity", position=dodge) +
+  theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+  geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25,position = dodge) + 
+  scale_x_discrete(labels=c("None", "Contains \n 'some but not all'", "Contains 'only some'")) +
+  scale_fill_discrete("Prompt type", 
+                      labels=c("Did speaker intend an \n inclusive meaning?", "Did speaker intend an \n upper-bounded meaning?")) +
+  labs(x = "Structure of second conjunct", y = "Mean response (0 = very unlikely, 100 = very likely)") +
+  ggtitle("Interpretation of 'some' in the first conjunct")
+
+
+
+```
+
+# Discussion
+
+* Qualitatively similar behavior vis a vis interpretation of *some* in the first conjunct, regardless of the structure of the second conjunct. That is, there appears to be a robust upper-bounded inference in all cases, contra the prediction of @Katzir2007. 
+
+* Possible analyses consistent with this result: reject that *some but not all* is a contextually-available alternative to *some* in these sentential contexts, or if you want to preserve that claim, build an analysis whereby alternatives are priveleged in pragmatic reasoning according to listener's previous expectations about speaker's language production (e.g. *all* privileged over *some but not all* with respect to status as alternatives to *some*).
+
+# References

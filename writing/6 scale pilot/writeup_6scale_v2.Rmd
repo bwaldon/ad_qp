@@ -69,21 +69,21 @@ As with the first iteration of the multiple scale experiment, there are 6 differ
 - Example sentence, no prime condition: **The homework that Professor Bridges assigns is always due the Monday after it is assigned.**
 - Exhaustivity interpretation question: *The homework that Professor Bridges assigns is not impossible to finish*
 
-# Changes from Pilot 1
+# Changes from the first multi-scale pilot
 
 ## More fillers
 
 There's now a single filler trial in between each scale block, such that can crete clear exclusion criteria. For half of these fillers, we should reasonably expect that participants answer on the upper part of the scale; for the other half, they should answer on the lower end. The order in which these fillers is presented is randomized for every participant (but a single filler is always presented between scale blocks). 
 
-## Five possible exclusion criteria
+## Six possible exclusion criteria
 
-This is obviously not an exhaustive list, but for the purposes of analyzing these data, I explored five possible ways to exclude participants: 
+This is obviously not an exhaustive list, but for the purposes of analyzing these data, I explored six possible ways to exclude participants: 
 
 - The **strict** exclusion criterion: participants are excluded for making one or more mistakes on fillers in the experiment. 
 
 - The **lax** exclusion criterion: participants are excluded for making N or more mistakes, for N > 1.
 
-- The **absolute-mean** exclusion criterion: if the mean of the good fillers is below 50%, OR the mean of the bad fillers is above 50%, you're out. 
+- The **absolute-mean** exclusion criterion: if the mean of the good fillers is below 50, OR the mean of the bad fillers is above 50, you're out. 
 
 - The **relative-mean** exclusion criterion: one of the criteria you suggested - "if the mean of the good fillers is lower than the mean of the bad fillers, you're out".
 
@@ -100,7 +100,7 @@ Below, I report the number of participants excluded given each of these criteria
 ## Presentational changes 
 
 - Every scale block is associated with a different, named speaker (in this pilot, the speaker names were fixed for a given scale block; e.g. the speaker of the *looks like* block was always 'Christina'). 
-- For every scale block, the (entire) critical trial is presented in red. 
+- For every scale block, the (entire) critical trial is presented in red. Going back, I realize this isn't exactly what you wanted; in the next version of the experiment, the form will be colored uniquely from the rest of the sentence on critical trials.  
 
 # Procedure
 
@@ -108,7 +108,7 @@ As with the last pilot, I created three experiment lists such that every list el
 
 # Results 
 
-# Number of exclusions for every exclusion criterion (out of 30 participants total)
+## Number of exclusions for every exclusion criterion (out of 30 participants total)
 
 - The **strict** exclusion criterion: 10 exclusions
 
@@ -116,81 +116,27 @@ As with the last pilot, I created three experiment lists such that every list el
 
 - The **absolute-mean** exclusion criterion: 3 exclusions
 
-- The **relative-mean** exclusion criterion: one of the criteria you suggested - "if the mean of the good fillers is lower than the mean of the bad fillers, you're out".
+- The **relative-mean** exclusion criterion: 1 exclusion 
 
-- The **bad-better-than-good** exclusion criterion: another suggestion of yours - "if any of the good fillers receive lower ratings than any of the bad fillers, you're out".
+- The **bad-better-than-good** exclusion criterion: 4 exclusions
 
-- The **difference-in-means** exclusion criterion: your last suggestion - "if the difference in means is lower than X, you're out".
- 
-Because of a really basic coding error, I can't distinguish between data from the 'palatable' and 'hard' scale trials (but I've fixed it for future runs!). However, here's a visualization of the results of the experiments from the other four scales. The below graph shows how interpretation of the weak scalar item on the critical trial changes depending on the nature of the priming trials for that scalar item. Of course, due to the incredibly low statistical power (as well as the fact that some data is missing), these results are very preliminary. 
+- The **difference-in-means** exclusion criterion: 3 exclusions (if we exclude participants for whom the difference in means is lower than 10, given a 0-100 scale). 
 
-```{r include=FALSE}
-library(tidyverse)
-library(bootstrap)
-library(formatR)
-library(reshape)
-theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+## Visualizations (without exclusions)
 
-ci.low <- function(x,na.rm=T) {
-  mean(x,na.rm=na.rm) - quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
-ci.high <- function(x,na.rm=T) {
-  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+source("~/Documents/GitHub/ad_qp/results/6scale/analysis.r")
+
+plot_means(toplot_noexcl)
+
+plot_subjectvar(toplot_subjectvar_noexcl, toplot_subjectvar_bysubject_noexcl)
 ```
+
+## Visualizations (excluding participants using the **strict** criterion)
 
 ```{r echo=FALSE}
-setwd("~/Documents/GitHub/ad_qp")
-d <- read.csv("results/6scale/6scale_anonymized.csv",header = TRUE, stringsAsFactors = FALSE)
 
-d <- data.frame(lapply(d, function(x) {
-  gsub('"', '', x)
-}))
+plot_means(toplot_strictexcl)
 
-d <- data.frame(lapply(d, function(x) {
-  gsub('\\\\', '', x)
-}))
-
-levels(d$target) <- c("none","some","or","n","lookslike", "tasty", "hard")
-
-d[d$id %in% c("reunion","vote","yoga","football"),]$target <- "some"
-d[d$id %in% c("inherit","birthday","mail","party"),]$target <- "or"
-d[d$id %in% c("rain","car","son","golden"),]$target <- "lookslike"
-d[d$id %in% c("library","cookies","chairs","bus"),]$target <- "n"
-d[d$id %in% c("homework","hospital"),]$target <- "hard"
-d[d$id %in% c("foodtruck","beer","wine","indian"),]$target <- "tasty"
-
-d$utteranceprime <- 0
-
-d[d$target == "or" & d$Answer.list == "list1",]$utteranceprime <- "exhaustive"
-d[d$target == "or" & d$Answer.list == "list2",]$utteranceprime <- "noprime"
-d[d$target == "or" & d$Answer.list == "list3",]$utteranceprime <- "strong_alternative"
-
-d[d$target == "some" & d$Answer.list == "list1",]$utteranceprime <- "strong_alternative"
-d[d$target == "some" & d$Answer.list == "list2",]$utteranceprime <- "exhaustive"
-d[d$target == "some" & d$Answer.list == "list3",]$utteranceprime <- "noprime"
-
-d[d$target == "lookslike" & d$Answer.list == "list1",]$utteranceprime <- "noprime"
-d[d$target == "lookslike" & d$Answer.list == "list2",]$utteranceprime <- "strong_alternative"
-d[d$target == "lookslike" & d$Answer.list == "list3",]$utteranceprime <- "exhaustive"
-
-d[d$target == "n" & d$Answer.list == "list1",]$utteranceprime <- "exhaustive"
-d[d$target == "n" & d$Answer.list == "list2",]$utteranceprime <- "noprime"
-d[d$target == "n" & d$Answer.list == "list3",]$utteranceprime <- "strong_alternative"
-
-d$response <- as.numeric(d$response) / 100
-
-toplot <- d %>% 
-  filter(target %in% c("or","some","lookslike","n") & type == "crit") %>%
-  group_by(target, utteranceprime) %>%
-  summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
-  ungroup() %>%
-  mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
-
-ggplot(toplot, aes(x=utteranceprime,y=Mean)) +
-  facet_wrap(~target) +
-  geom_bar(stat="identity") +
-  theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
-  geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) + 
-  labs(x = "Prime", y = "Interpretation (1 = maximum exhaustivity inference)") +
-  ggtitle("Strength of exhaustivity interpretations on critical trial by prime type")
+plot_subjectvar(toplot_subjectvar_strictexcl, toplot_subjectvar_bysubject_strictexcl)
 ```
-
