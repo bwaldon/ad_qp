@@ -47,7 +47,7 @@ var some_exh = [
 {type: "prime", primetype : "exh", target : "some", speaker: speakers[1], id: "reunion", sentence: "Sally saw some but not all of her former classmates at her high school reunion.", suggests: "Sally didn't see every former classmate of hers at the reunion"},
 {type: "prime", primetype : "exh", target : "some", speaker: speakers[1], id: "vote", sentence: "Some but not all of the residents of Mike's hometown are registered to vote.", suggests: "Not every resident of Mike's hometown is registered to vote"},
 {type: "prime", primetype : "exh", target : "some", speaker: speakers[1], id: "yoga", sentence: "Nick has taught yoga at some but not all of the yoga studios in his town.", suggests: "Nick hasn't taught yoga at every yoga studio in his town"},
-{type: "crit", primetype : "exh", target : "some", speaker: speakers[1], id: "football", sentence: "Marc and Melissa sent <font color='FF0000'>some</font> of their children to private school.", suggests: "Marc and Melissa didn't send every child of theirs to private school"},
+{type: "crit", primetype : "exh", target : "some", speaker: speakers[1], id: "privateschool", sentence: "Marc and Melissa sent <font color='FF0000'>some</font> of their children to private school.", suggests: "Marc and Melissa didn't send every child of theirs to private school"},
 {type: "filler", primetype : "na", target : "na", speaker: speakers[1], id: "low_right1", sentence: "Alfred's flight to Chicago will depart at 10:00am, not 9:00am as was originally scheduled", suggests: "Alfred's flight to Chicago is delayed by less than half an hour"},
 
 ];
@@ -59,7 +59,7 @@ var some_str = [
 {type: "prime", primetype : "str", target : "some", speaker: speakers[1], id: "reunion", sentence: "Sally saw all of her former classmates at her high school reunion.", suggests: "Sally didn't see every former classmate of hers at the reunion"},
 {type: "prime", primetype : "str", target : "some", speaker: speakers[1], id: "vote", sentence: "All of the residents of Mike's hometown are registered to vote.", suggests: "Not every resident of Mike's hometown is registered to vote"},
 {type: "prime", primetype : "str", target : "some", speaker: speakers[1], id: "yoga", sentence: "Nick has taught yoga at some but not all of the yoga studios in his town.", suggests: "Nick hasn't taught yoga at every yoga studio in his town"},
-{type: "crit", primetype : "str", target : "some", speaker: speakers[1], id: "football", sentence: "Marc and Melissa sent <font color='FF0000'>some</font> of their children to private school.", suggests: "Marc and Melissa didn't send every child of theirs to private school"},
+{type: "crit", primetype : "str", target : "some", speaker: speakers[1], id: "privateschool", sentence: "Marc and Melissa sent <font color='FF0000'>some</font> of their children to private school.", suggests: "Marc and Melissa didn't send every child of theirs to private school"},
 {type: "filler", primetype : "na", target : "na", speaker: speakers[1], id: "low_right1", sentence: "Alfred's flight to Chicago will depart at 10:00am, not 9:00am as was originally scheduled", suggests: "Alfred's flight to Chicago is delayed by less than half an hour"},
 
 ];
@@ -71,7 +71,7 @@ var some_no = [
 {type: "prime", primetype : "no", target : "some", speaker: speakers[1], id: "reunion", sentence: "Sally saw her favorite teacher, Mr. Meyer, at her high school reunion.", suggests: "Sally didn't see every former classmate of hers at the reunion"},
 {type: "prime", primetype : "no", target : "some", speaker: speakers[1], id: "vote", sentence: "The residents of Mike's hometown will vote for a new congressperson this November.", suggests: "Not every resident of Mike's hometown is registered to vote"},
 {type: "prime", primetype : "no", target : "some", speaker: speakers[1], id: "yoga", sentence: "Nick is a certified yoga instructor in his town.", suggests: "Nick hasn't taught yoga at every yoga studio in his town"},
-{type: "crit", primetype : "no", target : "some", speaker: speakers[1], id: "football", sentence: "Marc and Melissa sent <font color='FF0000'>some</font> of their children to private school.", suggests: "Marc and Melissa didn't send every child of theirs to private school"},
+{type: "crit", primetype : "no", target : "some", speaker: speakers[1], id: "privateschool", sentence: "Marc and Melissa sent <font color='FF0000'>some</font> of their children to private school.", suggests: "Marc and Melissa didn't send every child of theirs to private school"},
 {type: "filler", primetype : "na", target : "na", speaker: speakers[1], id: "low_right1", sentence: "Alfred's flight to Chicago will depart at 10:00am, not 9:00am as was originally scheduled", suggests: "Alfred's flight to Chicago is delayed by less than half an hour"},
 
 ];
@@ -156,7 +156,7 @@ var good_exh = [
 {type: "prime", primetype : "exh", target : "good", speaker: speakers[4], id: "foodtruck", sentence: "The food truck outside Max's office makes tacos that are good, but not excellent.", suggests: "The food truck outside Max's office makes tacos that aren't great"},
 {type: "prime", primetype : "exh", target : "good", speaker: speakers[4], id: "beer", sentence: "Guillermo's brewery has just released a new beer that is good, but not excellent.", suggests: "Guillermo's brewery has just released a new beer that is not great"},
 {type: "prime", primetype : "exh", target : "good", speaker: speakers[4], id: "wine", sentence: "The wine that Clare brought to her friend's party last night was good, but not excellent.", suggests: "The wine that Clare brought to her friend's party last night was not great"},
-{type: "crit", primetype : "exh", target : "good", speaker: speakers[4], id: "indian", sentence: "The apples that grow on Greg's farm are <font color='FF0000'>good</font>.", suggests: "The apples that grow on Greg's farm are not great"},
+{type: "crit", primetype : "exh", target : "good", speaker: speakers[4], id: "farm", sentence: "The apples that grow on Greg's farm are <font color='FF0000'>good</font>.", suggests: "The apples that grow on Greg's farm are not great"},
 {type: "filler", primetype : "na", target : "na", speaker: speakers[4], id: "high_right3", sentence: "Rachel's 11:00am flight to Austin is now scheduled to depart at 11:30am", suggests: "Rachel's flight to Austin is delayed by 30 minutes"},
 
 ];
@@ -169,7 +169,7 @@ var good_str = [
 {type: "prime", primetype : "str", target : "good", speaker: speakers[4], id: "foodtruck", sentence: "The food truck outside Max's office makes tacos that are excellent.", suggests: "The food truck outside Max's office makes tacos that aren't great"},
 {type: "prime", primetype : "str", target : "good", speaker: speakers[4], id: "beer", sentence: "Guillermo's brewery has just released a new beer that is excellent.", suggests: "Guillermo's brewery has just released a new beer that is not great"},
 {type: "prime", primetype : "str", target : "good", speaker: speakers[4], id: "wine", sentence: "The wine that Clare brought to her friend's party last night was excellent.", suggests: "The wine that Clare brought to her friend's party last night was not great"},
-{type: "crit", primetype : "str", target : "good", speaker: speakers[4], id: "indian", sentence: "The apples that grow on Greg's farm are <font color='FF0000'>good</font>.", suggests: "The apples that grow on Greg's farm are not great"},
+{type: "crit", primetype : "str", target : "good", speaker: speakers[4], id: "farm", sentence: "The apples that grow on Greg's farm are <font color='FF0000'>good</font>.", suggests: "The apples that grow on Greg's farm are not great"},
 {type: "filler", primetype : "na", target : "na", speaker: speakers[4], id: "high_right3", sentence: "Rachel's 11:00am flight to Austin is now scheduled to depart at 11:30am", suggests: "Rachel's flight to Austin is delayed by 30 minutes"},
 
 ];
@@ -181,7 +181,7 @@ var good_no = [
 {type: "prime", primetype : "no", target : "good", speaker: speakers[4], id: "foodtruck", sentence: "The food truck outside Max's office serves several kinds of beverages.", suggests: "The food truck outside Max's office makes tacos that aren't great"},
 {type: "prime", primetype : "no", target : "good", speaker: speakers[4], id: "beer", sentence: "Guillermo's brewery has just released a new beer.", suggests: "Guillermo's brewery has just released a new beer that is not great"},
 {type: "prime", primetype : "no", target : "good", speaker: speakers[4], id: "wine", sentence: "The wine that Clare brought to her friend's party was imported.", suggests: "The wine that Clare brought to her friend's party last night was not great"},
-{type: "crit", primetype : "no", target : "good", speaker: speakers[4], id: "indian", sentence: "The apples that grow on Greg's farm are <font color='FF0000'>good</font>.", suggests: "The apples that grow on Greg's farm are not great"},
+{type: "crit", primetype : "no", target : "good", speaker: speakers[4], id: "farm", sentence: "The apples that grow on Greg's farm are <font color='FF0000'>good</font>.", suggests: "The apples that grow on Greg's farm are not great"},
 {type: "filler", primetype : "na", target : "na", speaker: speakers[4], id: "high_right3", sentence: "Rachel's 11:00am flight to Austin is now scheduled to depart at 11:30am", suggests: "Rachel's flight to Austin is delayed by 30 minutes"},
 
 ];
@@ -309,11 +309,11 @@ function make_slides(f) {
     button : function() {
       if (exp.sliderPost == null) {
         $(".err").show();
-      } else if (exp.sliderPost < 0.50 && this.stim.id == "high_right") {
+      } else if (exp.sliderPost < 0.50 && this.stim.id == "high_right0") {
         $(".err").hide();
         $(".err_practice").show();
         this.stim.fuckeditup = true;
-      } else if (exp.sliderPost > 0.50 && this.stim.id == "low_right") {
+      } else if (exp.sliderPost > 0.50 && this.stim.id == "low_right0") {
         $(".err").hide();
         $(".err_practice").show();
         this.stim.fuckeditup = true;
