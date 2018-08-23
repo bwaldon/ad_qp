@@ -256,9 +256,13 @@ function make_slides(f) {
 
   slides.i0 = slide({
      name : "i0",
-     $(".button").hide();
      start: function() {
       exp.startT = Date.now();
+      if (grecaptcha.getResponse() !== 0) {
+      	$(".button").show();
+      } else {
+      	$(".button").hide();
+      }
      }
   });
 
