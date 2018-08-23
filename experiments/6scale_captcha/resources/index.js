@@ -256,14 +256,16 @@ function make_slides(f) {
 
   slides.i0 = slide({
      name : "i0",
-     start: function() {
-      exp.startT = Date.now();
-      $(".button").hide();
-      // if (grecaptcha.getResponse() !== 0) {
-      // 	$(".button").show();
-      // } else {
-      // 	$(".button").hide();
-      // }
+     start : function() {
+     	$(".captcha_error").hide();
+     }
+     button: function() {
+      if (grecaptcha.getResponse() !== 0) {
+      	exp.startT = Date.now();
+      	exp.go()
+      } else {
+      	$(".captcha_error").show();
+      }
      }
   });
 
