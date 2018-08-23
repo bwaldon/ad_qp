@@ -259,11 +259,11 @@ function make_slides(f) {
      start: function() {
       exp.startT = Date.now();
       $(".button").hide();
-      if (grecaptcha.getResponse() !== 0) {
-      	$(".button").show();
-      } else {
-      	$(".button").hide();
-      }
+      // if (grecaptcha.getResponse() !== 0) {
+      // 	$(".button").show();
+      // } else {
+      // 	$(".button").hide();
+      // }
      }
   });
 
