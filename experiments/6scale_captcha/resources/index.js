@@ -260,7 +260,7 @@ function make_slides(f) {
      	$(".captcha_error").hide();
      }
      button: function() {
-      if (grecaptcha.getResponse() !== 0) {
+      if (grecaptcha.getResponse().length !== 0) {
       	exp.startT = Date.now();
       	exp.go()
       } else {
