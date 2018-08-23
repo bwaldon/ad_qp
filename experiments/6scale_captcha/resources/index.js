@@ -256,7 +256,7 @@ function make_slides(f) {
 
   slides.i0 = slide({
      name : "i0",
-     $(".start_button").hide();
+     $(".button").hide();
      start: function() {
       exp.startT = Date.now();
      }
