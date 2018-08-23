@@ -259,7 +259,7 @@ function make_slides(f) {
      start : function() {
      	$(".captcha_error").hide();
      }
-     button: function() {
+     button : function() {
       if (grecaptcha.getResponse().length !== 0) {
       	exp.startT = Date.now();
       	exp.go()
