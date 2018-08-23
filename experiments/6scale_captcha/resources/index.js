@@ -258,6 +258,7 @@ function make_slides(f) {
      name : "i0",
      start: function() {
       exp.startT = Date.now();
+      $(".button").hide();
       if (grecaptcha.getResponse() !== 0) {
       	$(".button").show();
       } else {
