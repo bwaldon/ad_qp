@@ -257,13 +257,13 @@ function make_slides(f) {
   slides.captcha = slide({
   	name : "captcha",
   	start : function () {
-  		$.("captcha_error").hide()
+  		$.(".captcha_error").hide()
   	}
   	button : function () {
   	if (grecaptcha.getResponse().length !== 0){
   			exp.go();
   		} else {
-  			$.("captcha_error").show()
+  			$.(".captcha_error").show()
   		}
   	} 
   })
