@@ -50,12 +50,16 @@ $(function(){
 <body onload="init();">
   <noscript>This task requires JavaScript.</noscript>
 
+<div class = "slide" id = "captcha">
+    <div class="captcha_error"><p> You must pass the reCaptcha authentication before proceeding.</div>
+    <div class="g-recaptcha" data-sitekey="6LdTx2sUAAAAACz_np3ryNYm6AHsJLDNuNIoZ9z9"></div>
+    <button onclick="_s.button()">Begin HIT</button>
+  </div>
+
   <div class="slide" id="i0" >
     <p id="cocolab">Stanford Linguistics</p>
     <p id="instruct-text">This HIT involves making judgments about what people mean. Please pay attention, and thanks for your participation!</p>
     <button id="start_button" type="button">Continue</button>
-    <div class="captcha_error"><p> You must pass the reCaptcha authentication before proceeding.</div>
-    <div class="g-recaptcha" data-sitekey="6LdTx2sUAAAAACz_np3ryNYm6AHsJLDNuNIoZ9z9"></div>
   </div>
 
 <!--Consent form used in Stanford linguistics department and is good for ling245.

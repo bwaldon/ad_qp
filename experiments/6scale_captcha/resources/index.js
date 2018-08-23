@@ -254,21 +254,26 @@ function make_slides(f) {
     }
   });
 
-  slides.i0 = slide({
+  slides.captcha = slide({
+  	name : "captcha",
+  	start : function () {
+  		$.("captcha_error").hide()
+  	}
+  	button : function () {
+  	if (grecaptcha.getResponse().length !== 0){
+  			exp.go();
+  		} else {
+  			$.("captcha_error").show()
+  		}
+  	} 
+  })
+
+ slides.i0 = slide({
      name : "i0",
-     start : function() {
-     	$(".captcha_error").hide();
-     }
-     button : function() {
-      if (grecaptcha.getResponse().length !== 0) {
-      	exp.startT = Date.now();
-      	exp.go()
-      } else {
-      	$(".captcha_error").show();
-      }
+     start: function() {
+      exp.startT = Date.now();
      }
   });
-
 
   slides.instructions = slide({
     name : "instructions",
@@ -466,7 +471,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "consent", "instructions", "getready_practice", "practice_trials", "getready", "one_slider", 'subj_info', 'thanks'];
+  exp.structure=["captcha", "i0", "consent", "instructions", "getready_practice", "practice_trials", "getready", "one_slider", 'subj_info', 'thanks'];
 
   exp.data_trials = [];
   //make corresponding slides:
