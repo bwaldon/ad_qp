@@ -1,0 +1,37 @@
+How is interpretation of weak scalar items modulated by prior exposure to language which explicitly encodes an upper-bounded meaning?
+
+The null hypothesis: for a given scale, exposure to upper-bounded meanings does not affect the degree to which weak scalar items receive an upper-bounded interpretation. 
+
+The "meaning blocking" hypothesis: for a given scale, exposure to upper-bounded meanings attenuates the degree to which weak scalar items receive an upper-bounded interpretation.
+
+The "meaning priming" hypothesis: for a given scale, exposure to upper-bounded meanings increases the degree to which weak scalar items receive an upper-bounded interpretation.
+
+-
+
+The key dependent variable is "degree of upper-bounded interpretation". For a given sentence (presented in bold), participants are asked about the likelihood with which the speaker of that sentence intended an upper-bounded meaning (presented as an italicized sentence) - by responding on a continuous sliding scale bounded by the endpoints "very unlikely" and "very likely".
+
+- 
+
+For the six scales of interest (or/and, some/all, hard/impossible, looks-like/is (an X), cardinal numerals, good/excellent), participants are assigned to one of two conditions: 
+
+A 'no-prime' condition: before interpreting the weak scalar item of interest, participants do not see any trials where they are asked to interpret sentences containing a semantically-encoded upper-bounded meaning from the scale or a strong scalar alternative. Instead, they see three sentences which do not contain any material from the semantic scale of interest. 
+
+An 'exhaustive prime' condition:  before interpreting the weak scalar item of interest, participants see three trials where they are asked to interpret sentences containing a semantically-encoded upper-bounded meaning from that same scale. 
+
+Participants are assigned to exactly one condition for each of the six scales, such that they are assigned to three 'no-prime' conditions and three 'exhaustive prime' conditions. 
+
+-
+
+For each of the six scales, linear regression predicting the response, coded as a 0-100 scale (0 = "very unlikely", 100 = "very likely"). Predictors will be prime type (none, 'exhaustive').
+
+-
+
+NO SECONDARY ANALYSES
+
+- 
+
+For each of the six scales, 50 observations in each condition (600 observations total). 50 participants. 
+
+- 
+
+Data from participants who fail two or more control items will be excluded. "Failure" is defined as answering in the lower half of the scale on control items where the bolded sentence uncontroversially implies the italicized sentence (high_right controls), or answering in the upper half of the scale on control items where the bolded sentence clearly does not imply the italicized sentence (low_right controls). There are three high_right and three low_right controls in the study. 
