@@ -346,6 +346,10 @@ function make_slides(f) {
     }
   });
 
+  slides.auth = slide({
+  	name : "auth",
+  });
+
   slides.one_slider = slide({
     name : "one_slider",
 
@@ -455,7 +459,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "consent", "instructions", "getready_practice", "practice_trials", "getready", "one_slider", 'subj_info', 'thanks'];
+  exp.structure=["auth","i0", "consent", "instructions", "getready_practice", "practice_trials", "getready", "one_slider", 'subj_info', 'thanks'];
 
   exp.data_trials = [];
   //make corresponding slides:
