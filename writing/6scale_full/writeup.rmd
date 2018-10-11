@@ -1,0 +1,296 @@
+---
+title: "Full multi-scale experiment results" 
+author: "Brandon Waldon"
+date: "October 2, 2018"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+fig_width: 6 
+fig_height: 4 
+header-includes:
+  - \usepackage{hyperref} 
+  - \usepackage{graphicx}
+fontsize: 12pt
+# bibliography: refs.bib
+---
+
+(A working version of the experiment file is available at \url{https://bwaldon.github.io/ad_qp/experiments/6scale_full/})
+
+(Preregistrations can be found at \url{https://osf.io/mkpf8/})
+
+In this writeup, I report the results of two experiments, which were deployed in one online experiment file (linked above). Both experiments were premised on hypotheses about the capacity of scalar meanings to prime subsequent interpretation of weak scalar items, though the semantics of those scalar meanings varied between the experiments. The hypotheses took the following two forms: 
+
+The *null hypothesis:* for a given scale, exposure to [the scalar meaning of interest] does not affect the degree to which weak scalar items receive an upper-bounded interpretation. 
+
+The *meaning blocking hypothesis*: for a given scale, exposure to [the scalar meaning of interest] meanings attenuates the degree to which weak scalar items receive an upper-bounded interpretation.
+
+The *meaning priming hypothesis*: for a given scale, exposure to [the scalar meaning of interest] increases the degree to which weak scalar items receive an upper-bounded interpretation.
+
+# Experiment 1: strong scalar alternatives
+
+Experiment 1 was a priming experiment which investigated the effect of exposure to **strong scalar alternatives** on subsequent interpretation of weak scalar items. For example, (how) does prior exposure to the form *all* influence interpretation of *some*? 
+
+## Methods 
+
+### Participants
+
+93 participants (US IP Addresses, prior approval rating > 95\%) were recruited on Amazon Mechanical Turk. Participants were paid $1.20 for a task which took, on average, roughly 7.5 minutes to complete. 
+
+### Materials
+
+Each trial consisted of a **bolded** sentence (the target item), attributed to a name speaker, followed on a separate line by the text "How likely is it that [the named speaker] meant to suggest", followed on a separate line by an *italicized* sentence (the 'interpretation sentence'). Each trial also contained continuous scale bounded by the endpoints "very unlikely" (on the left end of the scale) and "very likely" (on the right end of the scale). Critical trials of the experiment differed from priming and filler trials of the experiment in that the bolded sentence was also colored red, as can be seen below: 
+
+\begin{figure}[h!]
+  \caption{A sample priming trial from the experiment}
+  \begin{center}
+  \includegraphics[width=0.75\textwidth]{ss1}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{A sample corresponding critical trial experiment}
+  \begin{center}
+  \includegraphics[width=0.75\textwidth]{ss2}
+  \end{center}
+\end{figure}
+
+As can be seen in the above figures, the target item on priming trials (in the priming condition of the experiment) contained a strong scalar construction (e.g. *all*). Participants in the priming condition saw three priming trials in a row, where each target item contained the same lexical item. Participants in the no-prime condition of the experiment did not see a scalar item on priming trials. In both condiitons, however, the four priming trials were immediately followed by the identical critical trial, which contained a weak lexical item (e.g. *some*) from the same scale as the strong scalar construction seen in the priming condition. Moreover, in all conditions, participants saw the same interpretation sentences on both priming trials and critical trials, which always conveyed an exhaustive meaning from the scale of interest (e.g. *not every* for the <all,some> scale).
+
+The three priming trials, plus the one critical trial and a subsequent random filler item, constituted one block of trials. The name of the speaker was kept consistent within a single block, but names were randomly distributed between blocks such that no speaker saw the same name in more than one block. The experiment determined the distribution of names randomly every time the experiment was opened by a participant; that is, though Figures 1 and 2 happen to show the name "Henry" for the *some* block, this name had an equal chance of association with any other experimental block. In total, participants saw six blocks, constructed using items from the following scales: <all, some>, <and, or>, <is, looks like> (an ad-hoc scale), <delicious, palatable>, and <impossible, hard>. There were two lists of trials, such that each participant saw three no-prime condition blocks and three priming condition blocks. In total, participants saw 32 trials, including two training items (explained below). 
+
+#### 'Some'
+- Stronger alternative: 'all'
+- Interpretation question: "not every..."
+- Example sentence, priming condition: **Sally saw some but not all of her former classmates at her high school reunion**
+- Example sentence, no prime condition: **Sally saw her favorite teacher, Mr. Meyer, at her high school reunion.**
+- Interpretation question: *Sally didn't see every former classmate of hers at the reunion*
+
+#### 'Or'
+- Stronger alternative: 'and'
+- Interpretation question: "only one of these things..."
+- Example sentence, priming condition: **Peter inherited the painting or the wardrobe from his grandmother, but not both**
+- Example sentence, no prime condition: **Peter inherited the painting from his grandmother, whereas his aunt Jill inherited the wardrobe.** 
+- Interpretation question: *Peter inherited only one of these things from his grandmother*
+
+#### 'Looks like'
+- Stronger alternative: 'is'
+- Interpretation question: "something other than..."
+- Example sentence, priming condition: **It looks like it's raining outside, but it isn't.**
+- Example sentence, no prime condition: **It's snowing outside.**
+- Interpretation question: *The weather outside is something other than rain*
+
+#### Cardinal numbers (i.e. 34)
+- Stronger alternative: '35'
+- Interpretation question: "no more than 34..."
+- Example sentence, priming condition: **Exactly 34 books were stolen from the local library yesterday.**
+- Example sentence, no prime condition: **There was a break-in at the local library yesterday.**
+- Interpretation question: *No more than 34 books were stolen from the local library yesterday*
+
+#### 'Palatable'
+- Stronger alternative: 'delicious'
+- Interpretation question: "not exceptionally tasty..."
+- Example sentence, priming condition: **Guillermo's brewery has just released a new beer that is palatable, but not delicious.**
+- Example sentence, no prime condition: **Guillermo's brewery has just released a new beer.**
+- Interpretation question: *Guillermo's brewery has just released a new beer that is not exceptionally tasty*
+
+#### 'Hard'
+- Stronger alternative: 'unsolvable'
+- Interpretation question: "not impossible to..."
+- Example sentence, priming condition: **The homework that Professor Bridges assigns is hard, but not unsolvable.**
+- Example sentence, no prime condition: **The homework that Professor Bridges assigns is always due the Monday after it is assigned.**
+- Interpretation question: *The homework that Professor Bridges assigns is not impossible to finish*
+
+As mentioned above, each block also contained a randomly-distributed filler trial. These filler trial were served as controls, in that for half of the trials, the target item uncontroversially implied the interpretation sentence, while for the other half of the trials, the target item clearly did not imply the interpretation sentence. In the former case, a response in the lower half of the scale was clearly unjustified; in the latter, a response in the upper half of the scale was similarly a priori dispreferred. Divergent behavior on at more than one of these trials led to exclusion of a participant's data. 
+
+### Procedure 
+
+Participants were shown the following instructions: 
+
+\begin{center}
+
+In this experiment, you will see up to 7 pairs of sentences. For each pair, please judge how likely it is that the speaker of the \textbf{bolded} sentence meant to imply the sentence in \textit{italics}.
+
+"Indicate your judgment by clicking on the sliding scale that will appear below the sentences. Don't think too deeply about the sentences, just provide your first intuition about what the speaker meant!"
+
+\end{center}
+
+After clicking through these instructions to start the experiment, participants were informed that they would be given two practice trials which contained the following sentence pairs: 
+
+\medskip 
+
+Practice trial 1: 
+\setlength{\leftskip}{1cm}
+
+**A handful of people showed up to the meeting.**
+
+*Nobody showed up to the meeting.*
+
+\setlength{\leftskip}{0pt}
+
+Practice trial 2:
+\setlength{\leftskip}{1cm}
+
+**Judith's hometown has a population of less than 10,000.**
+
+*Fewer than 10,000 people live in Judith's hometown.*
+
+\setlength{\leftskip}{0pt}
+
+\medskip
+
+If a participant provided a response within the upper portion of the scale on the first practice trial, and/or if she provided a response within the lower portion of the scale for the second practice trial, the following message appeared: 
+
+\begin{center}
+"Not quite! Remember that if the implied meaning is likely, your answer should be on the higher end of the scale. If the implied meaning is unlikely, your answer should be on the lower end of the scale."
+\end{center}
+
+In these cases, participants had to move the slider to the opposite end of the scale before continuing. There was no feedback on subsequent trials. In order to move to the next trial, participants had a to make a selection on the scale. 
+
+## Results
+
+Data from 14 participants were excluded on the criterion explained above. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(tidyverse)
+library(bootstrap)
+library(formatR)
+library(reshape)
+library(lme4)
+library(lmerTest)
+
+# helpers
+
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
+
+# load data
+
+setwd("~/Documents/GitHub/ad_qp")
+
+d <- read.csv("results/6scale_full/results.csv",header = TRUE, stringsAsFactors = FALSE)
+
+d <- data.frame(lapply(d, function(x) {
+  gsub('"', '', x)
+}))
+
+d <- data.frame(lapply(d, function(x) {
+  gsub('\\\\', '', x)
+}))
+
+rawcounts <- d %>%
+  group_by(Answer.list) %>%
+  summarize(n = n()/32)
+
+# exclusions (using the "lax exclude" criterion)
+
+d$correct <- 0
+d[d$id %in% c("high_right1","high_right2","high_right3"),]$correct <- "high"
+d[d$id %in% c("low_right1","low_right2","low_right3"),]$correct <- "low"
+
+d$response <- as.numeric(d$response)
+
+d_excl <- d %>%
+  group_by(workerid, id, correct) %>%
+  summarize(response) %>%
+  filter((correct == "high" && response < 50) || (correct == "low" && response > 50)) %>%
+  group_by(workerid) %>%
+  summarize(n_mistakes = n()) %>%
+  filter(n_mistakes > 1)
+
+d <- d %>%
+  filter(!(workerid %in% d_excl$workerid)) %>%
+  filter(type %in% c("prime","crit"))
+
+d$primetype <- relevel(d$primetype, ref = "no")
+
+# primetype of critical trials is currently 'na' when really it should be the primetype of the prime
+
+fillTheBlanks <- function(x, missing="na"){
+  rle <- rle(as.character(x))
+  empty <- which(rle$value==missing)
+  rle$values[empty] <- rle$value[empty-1] 
+  inverse.rle(rle)
+}
+
+d$primetype <- fillTheBlanks(d$primetype)
+
+# chunk data into both experiments
+
+d_exh <- d %>%
+  filter(Answer.list %in% c("list1_exh","list2_exh"))
+
+counts <- d %>%
+  group_by(Answer.list) %>%
+  summarize(n = n()/24)
+
+d_str <- d %>%
+  filter(Answer.list %in% c("list1_str","list2_str"))
+
+# plotting functions 
+
+toplot <- function (data) {
+  output <- data %>% 
+    filter(type == "crit") %>%
+    group_by(target, primetype) %>%
+    summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response),n=n()) %>%
+    ungroup() %>%
+    mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+  return(output)
+}
+
+plot_means <- function (toplot) {
+  ggplot(toplot, aes(x=primetype,y=Mean)) +
+    facet_wrap(~target) +
+    geom_bar(stat="identity") +
+    theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+    geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) + 
+    labs(x = "Condition", y = "Interpretation (100 = maximum exhaustivity inference)") +
+    ggtitle("Mean strength of exhaustivity interpretations on critical trials") + 
+    scale_x_discrete(labels=c("No-prime\n Condition", "Priming\n Condition"))
+}
+
+toplot_subjectvar <- function(data){
+  output = data %>%
+    filter((type == "crit" | type == "prime")) %>%
+    group_by(primetype,type,target) %>%
+    summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response),n=n()) %>%
+    ungroup() %>%
+    mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+  output$type <- relevel(output$type, ref = "prime")
+  return(output)
+} 
+
+toplot_subjectvar_bysubject <- function(data) {
+  output = data %>%
+    filter((type %in% c("crit","prime"))) %>%
+    group_by(primetype,type,target,workerid) %>%
+    summarize(Mean = mean(response),CILow=ci.low(response),CIHigh =ci.high(response)) %>%
+    ungroup() %>%
+    mutate(Ymin=Mean-CILow,Ymax=Mean+CIHigh)
+  output$type <- relevel(output$type, ref = "prime")
+  return(output)
+}
+
+plot_subjectvar <- function(subjectvar, subjectvar_bysubject) {
+  ggplot(subjectvar, aes(x=type,y=Mean)) +
+    geom_bar(stat="identity") +
+    facet_grid(primetype ~ target) +
+    geom_line(data = subjectvar_bysubject, aes(group=workerid), color = "red", alpha = 0.5) + 
+    theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
+    geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25) +  
+    geom_point(data = subjectvar_bysubject) +
+    ggtitle("Change in behavior between priming and critical trials, \n broken down by subject") +
+    labs(x = "Trial type", y = "Interpretation (100 = maximum exhaustivity inference)") +
+    scale_x_discrete(labels=c("Priming trials (mean)", "Critical trial"))
+}
+
+plot_means(toplot(d_str))
+# plot_subjectvar(toplot_subjectvar(d_str), toplot_subjectvar_bysubject(d_str))
+```
+
+

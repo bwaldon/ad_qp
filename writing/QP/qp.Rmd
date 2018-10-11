@@ -1,0 +1,83 @@
+---
+title: "Alternatives and Adaptation in Scalar Implicature"
+author: "Brandon Waldon"
+date: "9/27/2018"
+header-includes: \usepackage{hyperref}
+# fontsize: 12pt
+bibliography: refs.bib
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction 
+
+Informal definition of scalar implicture (SI) offered by @Potts:2013:PI: a contextually-conditioned inference arising from social-cognitive (cf. Griceans, Bayesian / game-theoretic pragmaticists) or semantic processes (cf. grammaticists); namely: 
+
+\setlength{\leftskip}{1cm}
+
+An utterance $U$ conveys a scalar conversational implicature iff there are alternative utterances $U'$ that are at least as relevant as $U$ in the discourse and that are communicatively stronger than $U$. (The content of this implicature will depend on the context, the nature of the utterance competition, and other pragmatic factors.)
+
+\setlength{\leftskip}{0pt}
+
+## A categorical view of SI: 
+
+* By far the most popular understanding of SI
+* Encompasses both (neo-)Gricean and grammaticist views. 
+* The inference: the negation of a proposition expressed by a communicatively stronger alternative utterance [or a related, weaker inference regarding the speaker's epistemic attitude towards that proposition, cf. @sauerland2004scalar].
+
+## A gradient view of SI:
+
+* A newer class of formal analysis of SI relying on probabilistic inference [cf. @goodman2013knowledge; @franke2016probabilistic].
+* The inference: any negative change in the listener-perceived posterior probability of a meaning conveyed by a communicatively stronger alternative. 
+
+## Comparing the approaches
+
+* As a quantitative class of formalisms, the gradient view allows for the specification of models which capture population-level variation in pragmatic inference [@potts2016embedded, Waldon et al. in prep] as well as the specification of explicit linking functions from competence to behavior in experimental paradigms [@jasbietal_frontiers]. 
+
+The present project expands critical comparison of the two approaches by exploring two conjectures: 
+
+* 
+**Conjecture #1 (Priming)**: The gradient view uniquely allows for the specification of quantitative models which capture within-subject priming effects in scalar implicature experimental paradigms. 
+
+*
+**Conjecture #2 (Interpretation)**: The gradient view allows for the specification of models which generate unique predictions regarding the kinds of SI inferences that are available to listeners. 
+
+# Priming: 
+
+Priming with respect to SI is a well-attested phenomenon (cf. the work of Bott, Degen, Papafragou, and collaborators). 
+
+<!-- Note to self: a serious literature review of adaptation and priming in SI is in order -->
+
+## Priming via exposure to the strong scalar alternative
+
+* Meaning blocking hypothesis: for a given scale, exposure to strong scalar alternative meanings attenuates the degree to which weak scalar items receive an upper-bounded interpretation.
++ 
++ 
+* Meaning priming hypothesis: for a given scale, exposure to strong scalar alternative meanings increases the degree to which weak scalar items receive an upper-bounded interpretation. 
++ 
++
+
+## Priming via exposure to upper-bounded meanings
+
+* Meaning blocking hypothesis: for a given scale, exposure to upper-bounded meanings attenuates the degree to which weak scalar items receive an upper-bounded interpretation.
++
++
+* Meaning priming hypothesis: for a given scale, exposure to upper-bounded meanings increases the degree to which weak scalar items receive an upper-bounded interpretation.
++
++
+
+The RSA framework affords us a quantitative model of adaptation consistent with meaning blocking or meaning priming hypothesis, regardless of whether the priming comes from exhaustive meanings or strong scalar alternatives. 
+
+## Gradient priming
+
+Gradient adaptation: an empirical faultline: only RSA allows us to model gradient meaning-blocking adaptation at all, categorical models of SI predict that pragmatic interpretation can vary only in a binary respect (i.e. is the alternative online or not?)
+
+## Interpretation: 
+
+Range of interpretation options constrained on categorical views by virtue of how these models must deal with the symmetry problem. 

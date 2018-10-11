@@ -1,0 +1,64 @@
+---
+title: "Scalar implicature priming paradigms: exploring the space of possibilities"
+author: "Brandon Waldon"
+date: "9/29/2018"
+output: pdf_document
+---
+
+In this short critical literature review, I survey recent experimental investigations of priming and scalar implicature. Scalar implicature, one of the most well-studied phenomena in both formal and experimental pragmatics, is defined informally by Potts below:
+
+[definition]
+[example of scalar implicature]
+
+As Potts' definition makes clear, the notion of an utterance alternative is central to the definition of scalar implicature. It is perhaps not surprising, then, that the psycholinguistic literature on scalar implicature priming has focused on the dependence of implicature calculation on the activation of utterance alternatives in an experimental setting. 'Priming' of scalar implicature is defined for the purposes of this review as an experimentally-elicited increase in the strength of exhaustive interpretations of weak scalar items relative to a clearly-defined neutral baseline. Much of the early work on scalar implicature priming comes by way of the developmental linguistic literature. [Summarize Noveck 2001; Papafragou and Musolino 2002]. The bulk of the adult literature is more recent, and below I outline some of the major axes of variation in experimental paradigms qua scalar implicature priming. 
+
+[Strong-alternative vs. exhaustive vs. ad-hoc priming]
+
+Psycholingusitic work on scalar implicature priming varies according to the semantics of the prime. One commonly explored prime is the strong-alternative prime, whereby reseaerchers explore how participants' exposure to semantically-stronger scalemates to a given weak scalar item modulates subsequent interpretation of that item. [For example - in addition to Noveck 2001 and Papafragou and Musolino 2002 - van Tiel and Schaeken 2016, Rees and Bott 2018]. 
+
+[Which scales are tested? (Hint: usually some)]
+
+[Comprehension-to-production vs. production-to-production priming]
+- Do they lead to different behavior? If so, what is the theoretical import?
+- Rees and Bott claim: might provide support for the combination over salience model of SI
+
+  Imagine that comprehension-to-production priming of exh > production-to-production priming of exh 
+  Not predicted on a combination story: comprehension in this case possibly raises salience of the alternative "all"  but does not prime use (priming trials do not involve calculation of an implicature)
+  (Possibly) predicted on a salience-only story, for reasons above
+  
+  But imagine that comprehension-to-production priming of exh < production-to-production priming of exh
+  Consistent with the combination and salience story: perhaps alternative "all" not as salient in the comprehension-to-production condition by virtue of being scoped by negation (what about 'only some'?)
+  
+  Comprehension-to-production priming of exh > comprehension-to-production priming of alternative
+  Not predicted on a combination story: comprehension in this case possibly raises salience of the alternative "all"  but does not prime use (priming trials do not involve calculation of an implicature)
+  Not predicted on a salience-only story, unless we think that "all" under negation raises salience of "all" to a degree greater than positive "all"
+  => Need an independent probability-of-meaning parameter
+  
+[Biased-calculation vs. unbiased-calculation priming]
+Biased: Rees and Bott
+Unbiased: current experiment (footnote, question could be biasing and also contributing to the wiping out of an effect)
+[The 'meaning-blocking' vs. 'meaning-priming' hypothesis]
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

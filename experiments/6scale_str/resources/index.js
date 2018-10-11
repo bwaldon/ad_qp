@@ -55,7 +55,7 @@ var some_str = [
 
 {type: "prime", primetype : "str", target : "some", speaker: "Henry", id: "reunion", sentence: "Sally saw all of her former classmates at her high school reunion.", suggests: "Sally didn't see every former classmate of hers at the reunion"},
 {type: "prime", primetype : "str", target : "some", speaker: "Henry", id: "vote", sentence: "All of the residents of Mike's hometown are registered to vote.", suggests: "Not every resident of Mike's hometown is registered to vote"},
-{type: "prime", primetype : "str", target : "some", speaker: "Henry", id: "yoga", sentence: "Nick has taught yoga at some but not all of the yoga studios in his town.", suggests: "Nick hasn't taught yoga at every yoga studio in his town"},
+{type: "prime", primetype : "str", target : "some", speaker: "Henry", id: "yoga", sentence: "Nick has taught yoga at all of the yoga studios in his town.", suggests: "Nick hasn't taught yoga at every yoga studio in his town"},
 {type: "crit", primetype : "na", target : "some", speaker: "Henry", id: "football", sentence: "Marc and Melissa sent some of their children to private school.", suggests: "Marc and Melissa didn't send every child of theirs to private school"},
 {type: "filler", primetype : "na", target : "na", speaker: "Henry", id: "low_right1", sentence: "Alfred's flight to Chicago will depart at 10:00am, not 9:00am as was originally scheduled", suggests: "Alfred's flight to Chicago is delayed by less than half an hour"},
 

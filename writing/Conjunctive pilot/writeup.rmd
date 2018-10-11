@@ -1,11 +1,11 @@
 ---
-title: "Experimenting with contextually-activated alternatives"
+title: "Breaking symmetry, but retaining symmetric alternatives"
 author: "Brandon Waldon"
-date: "August 2, 2018 (Handout for Judith)"
+date: "September 28, 2018 (Notes for Dan)"
 output:
-  pdf_document: default
-  word_document: default
   html_document: default
+  word_document: default
+  pdf_document: default
 header-includes: 
   - \usepackage{gb4e}
   - \usepackage{hyperref}
@@ -75,10 +75,12 @@ ci.high <- function(x,na.rm=T) {
 
 # Results (without exclusions from training trials)
 
-```{r echo=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 setwd("~/Documents/GitHub/ad_qp")
 d <- read.csv("results/conj/conj_anonymized.csv")
+```
 
+```{r}
 d <- data.frame(lapply(d, function(x) {
   gsub('"', '', x)
 }))
@@ -109,7 +111,7 @@ ggplot(toplot, aes(x=primetype,y=Mean,fill = inference_question)) +
   theme(axis.text.x=element_text(angle=20,hjust=1,vjust=1)) +
   geom_errorbar(aes(ymin=Ymin,ymax=Ymax),width=.25,position = dodge) + 
   scale_x_discrete(labels=c("None", "Contains \n 'some but not all'", "Contains 'only some'")) +
-  scale_fill_discrete("Prompt type", 
+  scale_fill_manual(values=c("grey","white","Prompt type", 
                       labels=c("Did speaker intend an \n inclusive meaning?", "Did speaker intend an \n upper-bounded meaning?")) +
   labs(x = "Structure of second conjunct", y = "Mean response (0 = very unlikely, 100 = very likely)") +
   ggtitle("Interpretation of 'some' in the first conjunct")

@@ -1,6 +1,6 @@
 setwd("~/Documents/GitHub/ad_qp")
 
-d <- read.csv("results/6scale/6scale_anonymized2.csv",header = TRUE, stringsAsFactors = FALSE)
+d <- read.csv("results/6scale_full/results.csv",header = TRUE, stringsAsFactors = FALSE)
 
 theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
 
@@ -23,32 +23,6 @@ d <- data.frame(lapply(d, function(x) {
 d <- data.frame(lapply(d, function(x) {
   gsub('\\\\', '', x)
 }))
-
-d$utteranceprime <- 0
-
-d[d$target == "or" & d$Answer.list == "list1",]$utteranceprime <- "exhaustive"
-d[d$target == "or" & d$Answer.list == "list2",]$utteranceprime <- "noprime"
-d[d$target == "or" & d$Answer.list == "list3",]$utteranceprime <- "strong_alternative"
-
-d[d$target == "some" & d$Answer.list == "list1",]$utteranceprime <- "strong_alternative"
-d[d$target == "some" & d$Answer.list == "list2",]$utteranceprime <- "exhaustive"
-d[d$target == "some" & d$Answer.list == "list3",]$utteranceprime <- "noprime"
-
-d[d$target == "lookslike" & d$Answer.list == "list1",]$utteranceprime <- "noprime"
-d[d$target == "lookslike" & d$Answer.list == "list2",]$utteranceprime <- "strong_alternative"
-d[d$target == "lookslike" & d$Answer.list == "list3",]$utteranceprime <- "exhaustive"
-
-d[d$target == "n" & d$Answer.list == "list1",]$utteranceprime <- "exhaustive"
-d[d$target == "n" & d$Answer.list == "list2",]$utteranceprime <- "noprime"
-d[d$target == "n" & d$Answer.list == "list3",]$utteranceprime <- "strong_alternative"
-
-d[d$target == "hard" & d$Answer.list == "list1",]$utteranceprime <- "noprime"
-d[d$target == "hard" & d$Answer.list == "list2",]$utteranceprime <- "strong_alternative"
-d[d$target == "hard" & d$Answer.list == "list3",]$utteranceprime <- "exhaustive"
-
-d[d$target == "tasty" & d$Answer.list == "list1",]$utteranceprime <- "strong_alternative"
-d[d$target == "tasty" & d$Answer.list == "list2",]$utteranceprime <- "exhaustive"
-d[d$target == "tasty" & d$Answer.list == "list3",]$utteranceprime <- "noprime"
 
 d$response <- as.numeric(d$response)
 
